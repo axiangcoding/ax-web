@@ -1,0 +1,60 @@
+definitions:
+  v1.Params:
+    properties:
+      param1:
+        type: string
+      param2:
+        type: string
+    type: object
+info:
+  contact:
+    email: axiangcoding@gmail.com
+    name: axiangcoding
+  description: An example of gin
+  license: {}
+  title: Golang Gin Template API
+  version: 1.0.0
+paths:
+  /api/v1/demo/get:
+    get:
+      parameters:
+      - description: some params named param1
+        in: query
+        name: param1
+        type: string
+      - description: some params named param2
+        in: query
+        name: param2
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: demo，测试get
+  /api/v1/demo/post:
+    post:
+      parameters:
+      - description: some params json
+        in: body
+        name: params
+        schema:
+          $ref: '#/definitions/v1.Params'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: demo，测试post
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+  BasicAuth:
+    type: basic
+swagger: "2.0"

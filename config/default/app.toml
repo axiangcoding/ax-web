@@ -1,0 +1,12 @@
+[app]
+version = "0.0.1"
+name = "Gin开发基础模板"
+
+[app.filelog]
+enable = false
+path = "./logs/"
+
+
+[server]
+run_mode = "debug"
+port = 8080
