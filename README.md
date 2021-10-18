@@ -1,6 +1,6 @@
 # Go Gin Template [![Go Report Card](https://goreportcard.com/badge/github.com/axiangcoding/go-gin-template)](https://goreportcard.com/report/github.com/axiangcoding/go-gin-template)  [![MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
-切换语言: [中文](./README_ZH.md)|English
+Switch language: [中文](./README_ZH.md)|English
 
 ## Introduction
 
@@ -17,7 +17,7 @@ Use [Gin](https://github.com/gin-gonic/gin) to build an initial template for web
 
 3. Of course, if you know exactly what services you need, you can also use self-built services (such as Redis, Mysql, etc.) to replace the test environment provided by Docker
 
-### 配置
+### Configuration
 The reading of the configuration file in this project follows the following rules:
 - If the `config/app.toml` configuration file exists, read `config/app.toml` as the configuration file
 - If it does not exist, use the default configuration file `config/default/app.toml`
@@ -40,7 +40,7 @@ port = 8080
 ···
 ```
 
-### 运行
+### Running
 ```
 $ git clone https://gitee.com/axiangcoding/go-gin-template.git
 $ cd go-gin-template
