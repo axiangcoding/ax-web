@@ -5,10 +5,12 @@ name = "Gin开发基础模板"
 [app.filelog]
 enable = false
 path = "./logs/"
+# TODO 设置写入文件中的日志的日志级别
+level = "WARN"
 
 [app.token]
 secret = "randomSecret"
-# TODO 
+# TODO 设置token的过期时间
 expire_duration = "1h"
 
 

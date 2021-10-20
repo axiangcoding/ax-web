@@ -2,8 +2,9 @@ package middleware
 
 import (
 	"gin-template/core/util"
-	"log"
 	"net/http"
+
+	log "github.com/sirupsen/logrus"
 
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt"
@@ -23,19 +24,19 @@ func Token() gin.HandlerFunc {
 		if err != nil {
 			if ve, ok := err.(*jwt.ValidationError); ok {
 				if ve.Errors&jwt.ValidationErrorMalformed != 0 {
-					log.Println("That's not even a token")
+					log.Warn("That's not even a token")
 				} else if ve.Errors&(jwt.ValidationErrorExpired|jwt.ValidationErrorNotValidYet) != 0 {
 					// Token is either expired or not active yet
-					log.Println("Timing is everything")
+					log.Warn("Timing is everything")
 				} else {
-					log.Println("Couldn't handle this token:", err)
+					log.Warn("Couldn't handle this token:", err)
 				}
 			}
-			log.Println("Couldn't handle this token:", err)
+			log.Warn("Couldn't handle this token:", err)
 			c.Abort()
 			return
 		}
 		c.Next()
-		log.Println(cc.CustomerInfo)
+		log.Info(cc.CustomerInfo)
 	}
 }

@@ -7,13 +7,13 @@ import (
 	"gin-template/core/setting"
 	"gin-template/core/util"
 	"gin-template/routers"
-	"io"
-	"log"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
+
+	log "github.com/sirupsen/logrus"
 
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
@@ -21,6 +21,7 @@ import (
 
 func init() {
 	setting.Setup()
+	logging.Setup()
 	util.Setup()
 }
 
@@ -41,16 +42,8 @@ func init() {
 // @name token
 func main() {
 	runMode := viper.GetString("server.run_mode")
-	enableLog := viper.GetBool("app.filelog.enable")
-	// 是否打印日志到文件中
-	if enableLog {
-		f := logging.Setup()
-		gin.DisableConsoleColor()
-		gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
-	}
 
 	gin.SetMode(runMode)
-
 	r := routers.InitRouter()
 
 	srv := &http.Server{
@@ -72,7 +65,7 @@ func main() {
 	// kill -9 是 syscall.SIGKILL，但是无法被捕获到，所以无需添加
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 	<-quit
-	log.Println("Shutting down server...")
+	log.Warn("Shutting down server...")
 
 	// ctx是用来通知服务器还有5秒的时间来结束当前正在处理的request
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
@@ -81,5 +74,5 @@ func main() {
 		log.Fatal("Server forced to shutdown: ", err)
 	}
 
-	log.Println("Server exiting")
+	log.Info("Server exiting")
 }

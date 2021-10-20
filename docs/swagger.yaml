@@ -54,6 +54,18 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: demo，测试post
+  /api/v1/demo/test-log:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: demo，测试post
   /api/v1/login:
     post:
       parameters:
