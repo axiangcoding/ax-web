@@ -85,6 +85,7 @@ $ go run main.go
 - https://github.com/swaggo/swag/blob/master/README.md
 - https://github.com/spf13/viper/blob/master/README.md
 - https://pkg.go.dev/github.com/golang-jwt/jwt#section-documentation
+- https://github.com/sirupsen/logrus/blob/master/README.md
 
 ## 联系我
 

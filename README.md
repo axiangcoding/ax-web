@@ -85,6 +85,7 @@ You can see farther by standing on the shoulders of giants
 - https://github.com/swaggo/swag/blob/master/README.md
 - https://github.com/spf13/viper/blob/master/README.md
 - https://pkg.go.dev/github.com/golang-jwt/jwt#section-documentation
+- https://github.com/sirupsen/logrus/blob/master/README.md
 
 ## Contact me
 
