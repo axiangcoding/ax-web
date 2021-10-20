@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"gin-template/core/logging"
 	"gin-template/core/setting"
+	"gin-template/core/util"
 	"gin-template/routers"
 	"io"
 	"log"
@@ -20,6 +21,7 @@ import (
 
 func init() {
 	setting.Setup()
+	util.Setup()
 }
 
 // @title Golang Gin Template API
@@ -34,11 +36,9 @@ func init() {
 // @license.name
 // @license.url
 
-// @securityDefinitions.basic BasicAuth
-
 // @securityDefinitions.apikey ApiKeyAuth
 // @in header
-// @name Authorization
+// @name token
 func main() {
 	runMode := viper.GetString("server.run_mode")
 	enableLog := viper.GetBool("app.filelog.enable")
@@ -51,9 +51,7 @@ func main() {
 
 	gin.SetMode(runMode)
 
-	r := gin.Default()
-
-	routers.SetRouter(r)
+	r := routers.InitRouter()
 
 	srv := &http.Server{
 		Addr:    fmt.Sprintf(":%s", viper.GetString("server.port")),

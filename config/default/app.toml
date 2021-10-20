@@ -6,6 +6,11 @@ name = "Gin开发基础模板"
 enable = false
 path = "./logs/"
 
+[app.token]
+secret = "randomSecret"
+# TODO 
+expire_duration = "1h"
+
 
 [server]
 run_mode = "debug"

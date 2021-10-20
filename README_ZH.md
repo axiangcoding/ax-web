@@ -79,11 +79,12 @@ $ go run main.go
 站在巨人的肩膀上，才能看得更远
 
 - https://github.com/eddycjy/go-gin-example/blob/master/README.md
-
+- https://sodocumentation.net/go/topic/9463/best-practices-on-project-structure
 - https://docs.docker.com/get-docker/
 - https://gin-gonic.com/docs/
 - https://github.com/swaggo/swag/blob/master/README.md
 - https://github.com/spf13/viper/blob/master/README.md
+- https://pkg.go.dev/github.com/golang-jwt/jwt#section-documentation
 
 ## 联系我
 

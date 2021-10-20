@@ -29,6 +29,11 @@ var doc = `{
     "paths": {
         "/api/v1/demo/get": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -59,6 +64,11 @@ var doc = `{
         },
         "/api/v1/demo/post": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -71,6 +81,30 @@ var doc = `{
                         "schema": {
                             "$ref": "#/definitions/v1.Params"
                         }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/login": {
+            "post": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "测试用户登录",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "user id",
+                        "name": "user_id",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -100,11 +134,8 @@ var doc = `{
     "securityDefinitions": {
         "ApiKeyAuth": {
             "type": "apiKey",
-            "name": "Authorization",
+            "name": "token",
             "in": "header"
-        },
-        "BasicAuth": {
-            "type": "basic"
         }
     }
 }`

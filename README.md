@@ -79,11 +79,12 @@ Finally, you are free to use!
 You can see farther by standing on the shoulders of giants
 
 - https://github.com/eddycjy/go-gin-example/blob/master/README.md
-
+- https://sodocumentation.net/go/topic/9463/best-practices-on-project-structure
 - https://docs.docker.com/get-docker/
 - https://gin-gonic.com/docs/
 - https://github.com/swaggo/swag/blob/master/README.md
 - https://github.com/spf13/viper/blob/master/README.md
+- https://pkg.go.dev/github.com/golang-jwt/jwt#section-documentation
 
 ## Contact me
 
