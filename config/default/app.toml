@@ -10,3 +10,6 @@ path = "./logs/"
 [server]
 run_mode = "debug"
 port = 8080
+
+[swagger]
+enable = true

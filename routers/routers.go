@@ -12,7 +12,6 @@ import (
 )
 
 func SetRouter(router *gin.Engine) {
-	setSwaggerInfo()
 	groupV1 := router.Group("/api/v1")
 	{
 		demo := groupV1.Group("/demo")
@@ -21,7 +20,11 @@ func SetRouter(router *gin.Engine) {
 			demo.POST("/post", v1.DemoPost)
 		}
 	}
-	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	if viper.GetBool("swagger.enable") {
+		setSwaggerInfo()
+		router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	}
+
 }
 
 func setSwaggerInfo() {
