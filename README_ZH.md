@@ -1,4 +1,4 @@
-# Go Gin Template [![Go Report Card](https://goreportcard.com/badge/gitee.com/axiangcoding/go-gin-template)](https://goreportcard.com/report/gitee.com/axiangcoding/go-gin-template) [![MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
+# Go Gin Template [![Go Report Card](https://goreportcard.com/badge/github.com/axiangcoding/go-gin-template)](https://goreportcard.com/report/github.com/axiangcoding/go-gin-template)  [![MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
 切换语言: 中文|[English](./README.md)
 
@@ -71,6 +71,8 @@ $ go run main.go
 - Gin
 - Swagger
 - Viper
+- Logrus
+- JWT
 - Graceful stop
 - App configurable
 
@@ -79,11 +81,13 @@ $ go run main.go
 站在巨人的肩膀上，才能看得更远
 
 - https://github.com/eddycjy/go-gin-example/blob/master/README.md
-
+- https://sodocumentation.net/go/topic/9463/best-practices-on-project-structure
 - https://docs.docker.com/get-docker/
 - https://gin-gonic.com/docs/
 - https://github.com/swaggo/swag/blob/master/README.md
 - https://github.com/spf13/viper/blob/master/README.md
+- https://pkg.go.dev/github.com/golang-jwt/jwt#section-documentation
+- https://github.com/sirupsen/logrus/blob/master/README.md
 
 ## 联系我
 

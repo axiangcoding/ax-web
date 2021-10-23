@@ -2,11 +2,21 @@
 version = "0.0.1"
 name = "Gin开发基础模板"
 
-[app.filelog]
-enable = false
-path = "./logs/"
+[app.log]
+file.enable = true
+file.path = "./logs/"
+file.level = "INFO"
+
+[app.token]
+secret = "randomSecret"
+# TODO 设置token的过期时间
+expire_duration = "1h"
 
 
 [server]
 run_mode = "debug"
 port = 8080
+
+[swagger]
+enable = true
+

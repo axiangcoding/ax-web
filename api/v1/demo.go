@@ -1,6 +1,10 @@
 package v1
 
-import "github.com/gin-gonic/gin"
+import (
+	"gin-template/core/logging"
+
+	"github.com/gin-gonic/gin"
+)
 
 // @Summary demo，测试get
 // @Produce  json
@@ -8,6 +12,7 @@ import "github.com/gin-gonic/gin"
 // @Param param2 query string false "some params named param2"
 // @Success 200 {string} json ""
 // @Router /api/v1/demo/get [get]
+// @Security  ApiKeyAuth
 func DemoGet(c *gin.Context) {
 	param1 := c.Query("param1")
 	param2 := c.Query("param2")
@@ -28,6 +33,7 @@ type Params struct {
 // @Param params body Params false "some params json"
 // @Success 200 {string} json ""
 // @Router /api/v1/demo/post [post]
+// @Security  ApiKeyAuth
 func DemoPost(c *gin.Context) {
 	params := Params{}
 	c.BindJSON(&params)
@@ -35,4 +41,14 @@ func DemoPost(c *gin.Context) {
 		"method":    "post",
 		"post_body": params,
 	})
+}
+
+// @Summary demo，测试post
+// @Produce  json
+// @Success 200 {string} json ""
+// @Router /api/v1/demo/test-log [get]
+// @Security  ApiKeyAuth
+func TestLog(c *gin.Context) {
+	logging.Info("log log")
+	logging.Info("log log by logrus")
 }
