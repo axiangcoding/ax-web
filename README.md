@@ -71,6 +71,8 @@ Finally, you are free to use!
 - Gin
 - Swagger
 - Viper
+- Logrus
+- JWT
 - Graceful stop
 - App configurable
 

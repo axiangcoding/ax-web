@@ -1,4 +1,4 @@
-# Go Gin Template [![Go Report Card](https://goreportcard.com/badge/gitee.com/axiangcoding/go-gin-template)](https://goreportcard.com/report/gitee.com/axiangcoding/go-gin-template) [![MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
+# Go Gin Template [![Go Report Card](https://goreportcard.com/badge/github.com/axiangcoding/go-gin-template)](https://goreportcard.com/report/github.com/axiangcoding/go-gin-template)  [![MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
 切换语言: 中文|[English](./README.md)
 
@@ -71,6 +71,8 @@ $ go run main.go
 - Gin
 - Swagger
 - Viper
+- Logrus
+- JWT
 - Graceful stop
 - App configurable
 
