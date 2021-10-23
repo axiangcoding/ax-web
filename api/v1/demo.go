@@ -1,10 +1,9 @@
 package v1
 
 import (
-	"log"
+	"gin-template/core/logging"
 
 	"github.com/gin-gonic/gin"
-	"github.com/sirupsen/logrus"
 )
 
 // @Summary demo，测试get
@@ -50,6 +49,6 @@ func DemoPost(c *gin.Context) {
 // @Router /api/v1/demo/test-log [get]
 // @Security  ApiKeyAuth
 func TestLog(c *gin.Context) {
-	log.Println("log log")
-	logrus.Println("log log by logrus")
+	logging.Info("log log")
+	logging.Info("log log by logrus")
 }

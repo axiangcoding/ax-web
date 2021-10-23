@@ -7,43 +7,92 @@ import (
 	"path"
 
 	"github.com/gin-gonic/gin"
-	log "github.com/sirupsen/logrus"
+	"github.com/sirupsen/logrus"
 
 	"github.com/spf13/viper"
 )
 
-// TODO: 使用我们自己的文件输出类，而不是直接调用logrus
+var logFile = logrus.New()
+var logConsole = logrus.New()
+var enableFileLog = false
+
 func Setup() {
-	enableFileLog := viper.GetBool("app.filelog.enable")
+	enableFileLog = viper.GetBool("app.log.file.enable")
+	logConsole.SetFormatter(&logrus.TextFormatter{
+		ForceColors:     true,
+		TimestampFormat: "YYYY",
+	})
+
 	// 是否打印日志到文件中
-	// TODO: 应该设置两个log实例，一个写文件的格式，一个写标准输出的格式。标准输出用text，写文件需要json
 	if enableFileLog {
-		// 设置gin的日志输出
-		// TODO: 需要重新设定gin的logger中间件，使用我们自己的log输出，并且每次启动都写入到不同文件中
+		// 设置gin server的日志输出
 		serverFile := CreateLogFile("server.log")
 		gin.DisableConsoleColor()
 		gin.DefaultWriter = io.MultiWriter(os.Stdout, serverFile)
 
+		// 设置application的日志输出
 		appFile := CreateLogFile("app.log")
-		log.SetFormatter(&log.JSONFormatter{})
-		log.SetOutput(io.MultiWriter(os.Stdout, appFile))
-	} else {
-
-		log.SetFormatter(&log.TextFormatter{
-			ForceColors: true,
-		})
+		logFile.SetFormatter(&logrus.JSONFormatter{})
+		level, err := logrus.ParseLevel(viper.GetString("app.log.file.level"))
+		if err != nil {
+			level = logrus.InfoLevel
+		}
+		logFile.SetLevel(level)
+		logFile.SetOutput(io.MultiWriter(appFile))
 	}
 
 }
 
 func CreateLogFile(fileName string) *os.File {
-	logPath := viper.GetString("app.filelog.path")
+	logPath := viper.GetString("app.log.file.path")
 	if err := util.MkdirIfNotExist(logPath); err != nil {
-		log.Error(err)
+		Error(err)
 	}
 	f, err := os.Create(path.Join(logPath, fileName))
 	if err != nil {
-		log.Error(err)
+		Error(err)
 	}
 	return f
+}
+
+func Trace(args ...interface{}) {
+	logConsole.Trace(args)
+	if enableFileLog {
+		logFile.Trace(args)
+	}
+}
+
+func Info(args ...interface{}) {
+	logConsole.Info(args)
+	if enableFileLog {
+		logFile.Info(args)
+	}
+}
+
+func Warn(args ...interface{}) {
+	logConsole.Warn(args)
+	if enableFileLog {
+		logFile.Warn(args)
+	}
+}
+
+func Error(args ...interface{}) {
+	logConsole.Error(args)
+	if enableFileLog {
+		logFile.Error(args)
+	}
+}
+
+func Fatal(args ...interface{}) {
+	logConsole.Fatal(args)
+	if enableFileLog {
+		logFile.Fatal(args)
+	}
+}
+
+func Panic(args ...interface{}) {
+	logConsole.Panic(args)
+	if enableFileLog {
+		logFile.Panic(args)
+	}
 }
