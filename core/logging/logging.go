@@ -7,21 +7,22 @@ import (
 	"path"
 
 	"github.com/gin-gonic/gin"
-	"github.com/sirupsen/logrus"
+	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
+	"gopkg.in/natefinch/lumberjack.v2"
 
 	"github.com/spf13/viper"
 )
 
-var logFile = logrus.New()
-var logConsole = logrus.New()
+var logFile *zap.SugaredLogger
+var logConsole *zap.SugaredLogger
+
 var enableFileLog = false
 
 func Setup() {
 	enableFileLog = viper.GetBool("app.log.file.enable")
-	logConsole.SetFormatter(&logrus.TextFormatter{
-		ForceColors:     true,
-		TimestampFormat: "YYYY",
-	})
+	logger, _ := zap.NewDevelopment()
+	logConsole = logger.Sugar()
 
 	// 是否打印日志到文件中
 	if enableFileLog {
@@ -31,14 +32,34 @@ func Setup() {
 		gin.DefaultWriter = io.MultiWriter(os.Stdout, serverFile)
 
 		// 设置application的日志输出
-		appFile := CreateLogFile("app.log")
-		logFile.SetFormatter(&logrus.JSONFormatter{})
-		level, err := logrus.ParseLevel(viper.GetString("app.log.file.level"))
-		if err != nil {
-			level = logrus.InfoLevel
+		zapLevel := zapcore.InfoLevel
+		level := viper.GetString("app.log.file.level")
+		switch level {
+		case "info":
+			zapLevel = zapcore.InfoLevel
+		case "warn":
+			zapLevel = zapcore.WarnLevel
+		case "error":
+			zapLevel = zapcore.ErrorLevel
+		case "fatal":
+			zapLevel = zapcore.FatalLevel
 		}
-		logFile.SetLevel(level)
-		logFile.SetOutput(io.MultiWriter(appFile))
+		// lumberjack.Logger is already safe for concurrent use, so we don't need to
+		// lock it.
+		w := zapcore.AddSync(&lumberjack.Logger{
+			Filename:   path.Join(viper.GetString("app.log.file.path"), "application.log"),
+			MaxSize:    500, // megabytes
+			MaxBackups: 3,
+			MaxAge:     28, // days
+		})
+		core := zapcore.NewCore(
+			zapcore.NewJSONEncoder(zap.NewProductionEncoderConfig()),
+			w,
+			zapLevel,
+		)
+		logger := zap.New(core)
+		logFile = logger.Sugar()
+
 	}
 
 }
@@ -55,10 +76,17 @@ func CreateLogFile(fileName string) *os.File {
 	return f
 }
 
-func Trace(args ...interface{}) {
-	logConsole.Trace(args)
+func Debug(args ...interface{}) {
+	logConsole.Debug(args)
 	if enableFileLog {
-		logFile.Trace(args)
+		logFile.Debug(args)
+	}
+}
+
+func Debugf(template string, args ...interface{}) {
+	logConsole.Debugf(template, args)
+	if enableFileLog {
+		logFile.Debugf(template, args)
 	}
 }
 
@@ -69,10 +97,24 @@ func Info(args ...interface{}) {
 	}
 }
 
+func Infof(template string, args ...interface{}) {
+	logConsole.Info(template, args)
+	if enableFileLog {
+		logFile.Info(template, args)
+	}
+}
+
 func Warn(args ...interface{}) {
 	logConsole.Warn(args)
 	if enableFileLog {
 		logFile.Warn(args)
+	}
+}
+
+func Warnf(template string, args ...interface{}) {
+	logConsole.Warnf(template, args)
+	if enableFileLog {
+		logFile.Warnf(template, args)
 	}
 }
 
@@ -83,6 +125,14 @@ func Error(args ...interface{}) {
 	}
 }
 
+func Errorf(template string, args ...interface{}) {
+	logConsole.Errorf(template, args)
+	if enableFileLog {
+		logFile.Errorf(template, args)
+	}
+}
+
+
 func Fatal(args ...interface{}) {
 	logConsole.Fatal(args)
 	if enableFileLog {
@@ -90,9 +140,23 @@ func Fatal(args ...interface{}) {
 	}
 }
 
+func Fatalf(template string, args ...interface{}) {
+	logConsole.Fatalf(template, args)
+	if enableFileLog {
+		logFile.Fatalf(template, args)
+	}
+}
+
 func Panic(args ...interface{}) {
 	logConsole.Panic(args)
 	if enableFileLog {
 		logFile.Panic(args)
+	}
+}
+
+func Panicf(template string, args ...interface{}) {
+	logConsole.Panicf(template, args)
+	if enableFileLog {
+		logFile.Panicf(template, args)
 	}
 }

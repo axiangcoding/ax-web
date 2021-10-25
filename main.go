@@ -13,8 +13,6 @@ import (
 	"syscall"
 	"time"
 
-	log "github.com/sirupsen/logrus"
-
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
 )
@@ -54,7 +52,7 @@ func main() {
 	// 在 goroutine中初始化服务器，这样就不会阻塞下文的优雅停止处理
 	go func() {
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-			log.Fatalf("Listen: %s\n", err)
+			logging.Fatal("Listen: %s\n", err)
 		}
 	}()
 
@@ -65,14 +63,14 @@ func main() {
 	// kill -9 是 syscall.SIGKILL，但是无法被捕获到，所以无需添加
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 	<-quit
-	log.Warn("Shutting down server...")
+	logging.Warn("Shutting down server...")
 
 	// ctx是用来通知服务器还有5秒的时间来结束当前正在处理的request
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 	if err := srv.Shutdown(ctx); err != nil {
-		log.Fatal("Server forced to shutdown: ", err)
+		logging.Fatal("Server forced to shutdown: ", err)
 	}
 
-	log.Info("Server exiting")
+	logging.Info("Server exiting")
 }

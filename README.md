@@ -68,13 +68,12 @@ Finally, you are free to use!
 
 ## Feature
 
-- Gin
-- Swagger
-- Viper
-- Logrus
-- JWT
-- Graceful stop
-- App configurable
+- Gin (Web framework)
+- Swagger (Open Doc)
+- Viper (Config)
+- Zap (Log) 
+- JWT (Verify)
+- Graceful stop (Server)
 
 ## Reference
 
@@ -87,7 +86,8 @@ You can see farther by standing on the shoulders of giants
 - https://github.com/swaggo/swag/blob/master/README.md
 - https://github.com/spf13/viper/blob/master/README.md
 - https://pkg.go.dev/github.com/golang-jwt/jwt#section-documentation
-- https://github.com/sirupsen/logrus/blob/master/README.md
+- https://github.com/uber-go/zap/blob/master/README.md
+- https://github.com/natefinch/lumberjack/blob/v2.0/README.md
 
 ## Contact me
 

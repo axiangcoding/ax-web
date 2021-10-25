@@ -68,13 +68,12 @@ $ go run main.go
 
 ## 特性
 
-- Gin
-- Swagger
-- Viper
-- Logrus
-- JWT
-- Graceful stop
-- App configurable
+- Gin (Web framework)
+- Swagger (Open Doc)
+- Viper (Config)
+- Zap (Log) 
+- JWT (Verify)
+- Graceful stop (Server)
 
 ## 参考
 
@@ -87,7 +86,8 @@ $ go run main.go
 - https://github.com/swaggo/swag/blob/master/README.md
 - https://github.com/spf13/viper/blob/master/README.md
 - https://pkg.go.dev/github.com/golang-jwt/jwt#section-documentation
-- https://github.com/sirupsen/logrus/blob/master/README.md
+- https://github.com/uber-go/zap/blob/master/README.md
+- https://github.com/natefinch/lumberjack/blob/v2.0/README.md
 
 ## 联系我
 

@@ -26,7 +26,10 @@ func InitRouter() *gin.Engine {
 		{
 			demo.GET("/get", v1.DemoGet)
 			demo.POST("/post", v1.DemoPost)
-			demo.GET("/test-log", v1.TestLog)
+		}
+		test := groupV1.Group("/test")
+		{
+			test.GET("/test-log", v1.TestLog)
 		}
 		groupV1.POST("/login", v1.UserLogin)
 	}
