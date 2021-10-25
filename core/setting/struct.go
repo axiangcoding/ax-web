@@ -1,40 +1,26 @@
 package setting
 
 type AllConfig struct {
-	App    App
-	Server Server
+	App struct {
+		Version string
+		Name    string
+		Log     struct {
+			Level   string
+			FileLog struct {
+				Enable bool
+				Path   string
+			}
+		}
+		Token struct {
+			Secret         string
+			ExpireDuration string `mapstructure:"expire_duration"`
+		}
+		Swagger struct {
+			Enable bool
+		}
+	}
+	Server struct {
+		RunMode string `mapstructure:"run_mode"`
+		Port    string
+	}
 }
-
-type App struct {
-	Version string
-	Name    string
-	Log     Log
-	Token   Token
-	Swagger Swagger
-}
-
-type Log struct {
-	Level   string
-	FileLog FileLog
-}
-
-type FileLog struct {
-	Enable bool
-	Path   string
-}
-
-type Token struct {
-	Secret         string
-	ExpireDuration string
-}
-
-type Swagger struct {
-	Enable bool
-}
-
-type Server struct {
-	RunMode string `json:"run_mode"`
-	Port    string
-}
-
-
