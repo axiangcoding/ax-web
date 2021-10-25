@@ -2,11 +2,11 @@ package routers
 
 import (
 	v1 "gin-template/api/v1"
+	"gin-template/core/setting"
 	docs "gin-template/docs"
 	"gin-template/middleware"
 
 	"github.com/gin-gonic/gin"
-	"github.com/spf13/viper"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
@@ -33,7 +33,8 @@ func InitRouter() *gin.Engine {
 		}
 		groupV1.POST("/login", v1.UserLogin)
 	}
-	if viper.GetBool("swagger.enable") {
+
+	if setting.Config.App.Swagger.Enable {
 		setSwaggerInfo()
 		r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	}
@@ -41,6 +42,6 @@ func InitRouter() *gin.Engine {
 }
 
 func setSwaggerInfo() {
-	docs.SwaggerInfo.Version = viper.GetString("app.version")
-	docs.SwaggerInfo.Title = viper.GetString("app.name")
+	docs.SwaggerInfo.Version = setting.Config.App.Version
+	docs.SwaggerInfo.Title = setting.Config.App.Name
 }

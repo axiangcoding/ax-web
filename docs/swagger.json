@@ -21,6 +21,9 @@
                 "produces": [
                     "application/json"
                 ],
+                "tags": [
+                    "demo"
+                ],
                 "summary": "demo，测试get",
                 "parameters": [
                     {
@@ -56,6 +59,9 @@
                 "produces": [
                     "application/json"
                 ],
+                "tags": [
+                    "demo"
+                ],
                 "summary": "demo，测试post",
                 "parameters": [
                     {
@@ -81,6 +87,9 @@
             "post": {
                 "produces": [
                     "application/json"
+                ],
+                "tags": [
+                    "login"
                 ],
                 "summary": "测试用户登录",
                 "parameters": [
@@ -110,6 +119,9 @@
                 ],
                 "produces": [
                     "application/json"
+                ],
+                "tags": [
+                    "demo"
                 ],
                 "summary": "demo，测试post",
                 "responses": {

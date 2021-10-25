@@ -1,7 +1,8 @@
 package logging
 
 import (
-	"gin-template/core/util"
+	"gin-template/core/setting"
+	"gin-template/core/util/file"
 	"io"
 	"os"
 	"path"
@@ -10,8 +11,6 @@ import (
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"gopkg.in/natefinch/lumberjack.v2"
-
-	"github.com/spf13/viper"
 )
 
 var logFile *zap.SugaredLogger
@@ -20,7 +19,7 @@ var logConsole *zap.SugaredLogger
 var enableFileLog = false
 
 func Setup() {
-	enableFileLog = viper.GetBool("app.log.file.enable")
+	enableFileLog = setting.Config.App.Log.FileLog.Enable
 	logger, _ := zap.NewDevelopment()
 	logConsole = logger.Sugar()
 
@@ -33,7 +32,7 @@ func Setup() {
 
 		// 设置application的日志输出
 		zapLevel := zapcore.InfoLevel
-		level := viper.GetString("app.log.file.level")
+		level := setting.Config.App.Log.Level
 		switch level {
 		case "info":
 			zapLevel = zapcore.InfoLevel
@@ -47,7 +46,8 @@ func Setup() {
 		// lumberjack.Logger is already safe for concurrent use, so we don't need to
 		// lock it.
 		w := zapcore.AddSync(&lumberjack.Logger{
-			Filename:   path.Join(viper.GetString("app.log.file.path"), "application.log"),
+			Filename: path.Join(setting.Config.App.Log.FileLog.Path,
+				"application.log"),
 			MaxSize:    500, // megabytes
 			MaxBackups: 3,
 			MaxAge:     28, // days
@@ -65,8 +65,8 @@ func Setup() {
 }
 
 func CreateLogFile(fileName string) *os.File {
-	logPath := viper.GetString("app.log.file.path")
-	if err := util.MkdirIfNotExist(logPath); err != nil {
+	logPath := setting.Config.App.Log.FileLog.Path
+	if err := file.MkdirIfNotExist(logPath); err != nil {
 		Error(err)
 	}
 	f, err := os.Create(path.Join(logPath, fileName))
@@ -98,9 +98,9 @@ func Info(args ...interface{}) {
 }
 
 func Infof(template string, args ...interface{}) {
-	logConsole.Info(template, args)
+	logConsole.Infof(template, args)
 	if enableFileLog {
-		logFile.Info(template, args)
+		logFile.Infof(template, args)
 	}
 }
 
@@ -131,7 +131,6 @@ func Errorf(template string, args ...interface{}) {
 		logFile.Errorf(template, args)
 	}
 }
-
 
 func Fatal(args ...interface{}) {
 	logConsole.Fatal(args)

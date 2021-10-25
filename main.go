@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"gin-template/core/logging"
 	"gin-template/core/setting"
-	"gin-template/core/util"
+	jwt_util "gin-template/core/util/jwt"
 	"gin-template/routers"
 	"net/http"
 	"os"
@@ -14,13 +14,12 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/spf13/viper"
 )
 
 func init() {
 	setting.Setup()
 	logging.Setup()
-	util.Setup()
+	jwt_util.Setup()
 }
 
 // @title Golang Gin Template API
@@ -39,13 +38,11 @@ func init() {
 // @in header
 // @name token
 func main() {
-	runMode := viper.GetString("server.run_mode")
-
+	runMode := setting.Config.Server.RunMode
 	gin.SetMode(runMode)
 	r := routers.InitRouter()
-
 	srv := &http.Server{
-		Addr:    fmt.Sprintf(":%s", viper.GetString("server.port")),
+		Addr:    fmt.Sprintf(":%s", setting.Config.Server.Port),
 		Handler: r,
 	}
 
@@ -56,6 +53,8 @@ func main() {
 		}
 	}()
 
+	logging.Infof("Server start at port: %s", setting.Config.Server.Port)
+
 	// 等待中断信号来优雅停止服务器，设置的5秒延迟
 	quit := make(chan os.Signal, 1)
 	// kill （不带参数的）是默认发送 syscall.SIGTERM
@@ -63,7 +62,7 @@ func main() {
 	// kill -9 是 syscall.SIGKILL，但是无法被捕获到，所以无需添加
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 	<-quit
-	logging.Warn("Shutting down server...")
+	logging.Info("Shutting down server...")
 
 	// ctx是用来通知服务器还有5秒的时间来结束当前正在处理的request
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)

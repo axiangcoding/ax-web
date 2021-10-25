@@ -8,6 +8,7 @@ import (
 
 // @Summary demo，测试get
 // @Produce  json
+// @Tags demo
 // @Param param1 query string false "some params named param1"
 // @Param param2 query string false "some params named param2"
 // @Success 200 {string} json ""
@@ -30,6 +31,7 @@ type Params struct {
 
 // @Summary demo，测试post
 // @Produce  json
+// @Tags demo
 // @Param params body Params false "some params json"
 // @Success 200 {string} json ""
 // @Router /api/v1/demo/post [post]
@@ -45,6 +47,7 @@ func DemoPost(c *gin.Context) {
 
 // @Summary demo，测试post
 // @Produce  json
+// @Tags demo
 // @Success 200 {string} json ""
 // @Router /api/v1/test/test-log [get]
 // @Security  ApiKeyAuth

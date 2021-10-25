@@ -1,6 +1,7 @@
-package util
+package jwt
 
 import (
+	"gin-template/core/setting"
 	"time"
 
 	"github.com/golang-jwt/jwt"
@@ -16,6 +17,10 @@ type CustomerInfo struct {
 type CustomClaims struct {
 	*jwt.StandardClaims
 	CustomerInfo
+}
+
+func Setup() {
+	jwtSecret = []byte(setting.Config.App.Token.Secret)
 }
 
 // CreateToken generate tokens used for auth

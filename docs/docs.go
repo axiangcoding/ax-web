@@ -37,6 +37,9 @@ var doc = `{
                 "produces": [
                     "application/json"
                 ],
+                "tags": [
+                    "demo"
+                ],
                 "summary": "demo，测试get",
                 "parameters": [
                     {
@@ -72,6 +75,9 @@ var doc = `{
                 "produces": [
                     "application/json"
                 ],
+                "tags": [
+                    "demo"
+                ],
                 "summary": "demo，测试post",
                 "parameters": [
                     {
@@ -97,6 +103,9 @@ var doc = `{
             "post": {
                 "produces": [
                     "application/json"
+                ],
+                "tags": [
+                    "login"
                 ],
                 "summary": "测试用户登录",
                 "parameters": [
@@ -126,6 +135,9 @@ var doc = `{
                 ],
                 "produces": [
                     "application/json"
+                ],
+                "tags": [
+                    "demo"
                 ],
                 "summary": "demo，测试post",
                 "responses": {
