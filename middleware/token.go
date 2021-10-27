@@ -2,7 +2,7 @@ package middleware
 
 import (
 	"gin-template/core/logging"
-	"gin-template/core/util"
+	jwt_util "gin-template/core/util/jwt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -19,7 +19,7 @@ func Token() gin.HandlerFunc {
 			c.Abort()
 			return
 		}
-		cc, err := util.ParseToken(tokenString)
+		cc, err := jwt_util.ParseToken(tokenString)
 		if err != nil {
 			if ve, ok := err.(*jwt.ValidationError); ok {
 				if ve.Errors&jwt.ValidationErrorMalformed != 0 {

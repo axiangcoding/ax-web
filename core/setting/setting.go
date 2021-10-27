@@ -3,10 +3,11 @@ package setting
 import (
 	"log"
 
-	"github.com/fsnotify/fsnotify"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
 )
+
+var Config AllConfig
 
 func Setup() {
 	setDefault()
@@ -19,17 +20,24 @@ func Setup() {
 			log.Println("Config file not foud. The program will use default setting and may not work properly")
 		}
 	}
-	// 监控配置项，配置文件修改后会自动生效
-	viper.WatchConfig()
-	viper.OnConfigChange(func(in fsnotify.Event) {
-		log.Println("Config file changed", in.Name)
-	})
+	err := viper.Unmarshal(&Config)
+	if err != nil {
+		log.Fatalf("Unable to decode into struct, %v", err)
+	}
 
 }
 
 func setDefault() {
-	viper.SetDefault("app.logs_path", "logs/")
-	viper.SetDefault("server.port", 8080)
+	// generate a default config file maybe?
+	// 是否要生成一个默认的配置文件？
+	viper.SetDefault("app.version", "0.0.1")
+	viper.SetDefault("app.name", "axiangcoding/go-gin-template")
+	viper.SetDefault("app.log.level", "INFO")
+	viper.SetDefault("app.log.filelog.enable", "false")
+	viper.SetDefault("app.log.filelog.path", "./logs/")
+	viper.SetDefault("app.token,secret", "randomSecret")
+	viper.SetDefault("app.token.expire_duration", "1h")
+	viper.SetDefault("app.swagger.enable", true)
 	viper.SetDefault("server.run_mode", gin.ReleaseMode)
-
+	viper.SetDefault("server.port", 8080)
 }

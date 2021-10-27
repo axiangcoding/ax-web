@@ -1,11 +1,12 @@
 [app]
 version = "0.0.1"
-name = "Gin开发基础模板"
+name = "axiangcoding/go-gin-template"
 
 [app.log]
-file.enable = true
-file.path = "./logs/"
-file.level = "INFO"
+level = "INFO"
+filelog.enable = false
+filelog.path = "./logs/"
+
 
 [app.token]
 secret = "randomSecret"
@@ -13,10 +14,12 @@ secret = "randomSecret"
 expire_duration = "1h"
 
 
+[app.swagger]
+enable = true
+
 [server]
 run_mode = "debug"
 port = 8080
 
-[swagger]
-enable = true
+
 

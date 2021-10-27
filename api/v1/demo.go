@@ -8,6 +8,7 @@ import (
 
 // @Summary demo，测试get
 // @Produce  json
+// @Tags demo
 // @Param param1 query string false "some params named param1"
 // @Param param2 query string false "some params named param2"
 // @Success 200 {string} json ""
@@ -30,6 +31,7 @@ type Params struct {
 
 // @Summary demo，测试post
 // @Produce  json
+// @Tags demo
 // @Param params body Params false "some params json"
 // @Success 200 {string} json ""
 // @Router /api/v1/demo/post [post]
@@ -45,10 +47,14 @@ func DemoPost(c *gin.Context) {
 
 // @Summary demo，测试post
 // @Produce  json
+// @Tags demo
 // @Success 200 {string} json ""
-// @Router /api/v1/demo/test-log [get]
+// @Router /api/v1/test/test-log [get]
 // @Security  ApiKeyAuth
 func TestLog(c *gin.Context) {
-	logging.Info("log log")
-	logging.Info("log log by logrus")
+	logging.Debug("this is a debug log")
+	logging.Info("this is a info log")
+	logging.Info("this is a info log with params", "value1")
+	logging.Warn("this is a warn log")
+	logging.Fatal("this is a fatal log")
 }

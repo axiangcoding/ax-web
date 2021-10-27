@@ -37,6 +37,9 @@ var doc = `{
                 "produces": [
                     "application/json"
                 ],
+                "tags": [
+                    "demo"
+                ],
                 "summary": "demo，测试get",
                 "parameters": [
                     {
@@ -72,6 +75,9 @@ var doc = `{
                 "produces": [
                     "application/json"
                 ],
+                "tags": [
+                    "demo"
+                ],
                 "summary": "demo，测试post",
                 "parameters": [
                     {
@@ -93,31 +99,13 @@ var doc = `{
                 }
             }
         },
-        "/api/v1/demo/test-log": {
-            "get": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "summary": "demo，测试post",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
         "/api/v1/login": {
             "post": {
                 "produces": [
                     "application/json"
+                ],
+                "tags": [
+                    "login"
                 ],
                 "summary": "测试用户登录",
                 "parameters": [
@@ -128,6 +116,30 @@ var doc = `{
                         "in": "query"
                     }
                 ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/test/test-log": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "demo"
+                ],
+                "summary": "demo，测试post",
                 "responses": {
                     "200": {
                         "description": "OK",

@@ -36,6 +36,8 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: demo，测试get
+      tags:
+      - demo
   /api/v1/demo/post:
     post:
       parameters:
@@ -54,18 +56,8 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: demo，测试post
-  /api/v1/demo/test-log:
-    get:
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: string
-      security:
-      - ApiKeyAuth: []
-      summary: demo，测试post
+      tags:
+      - demo
   /api/v1/login:
     post:
       parameters:
@@ -81,6 +73,22 @@ paths:
           schema:
             type: string
       summary: 测试用户登录
+      tags:
+      - login
+  /api/v1/test/test-log:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: demo，测试post
+      tags:
+      - demo
 securityDefinitions:
   ApiKeyAuth:
     in: header
