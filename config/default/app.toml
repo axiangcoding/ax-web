@@ -10,7 +10,6 @@ filelog.path = "./logs/"
 
 [app.token]
 secret = "randomSecret"
-# TODO 设置token的过期时间
 expire_duration = "1h"
 
 
