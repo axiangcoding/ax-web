@@ -1,7 +1,7 @@
 package v1
 
 import (
-	jwt_util "gin-template/core/util/jwt"
+	jwt_util "gin-template/pkg/util/jwt"
 
 	"github.com/gin-gonic/gin"
 )

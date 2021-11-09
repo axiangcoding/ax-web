@@ -1,6 +1,11 @@
-package setting
+package conf
 
-type AllConfig struct {
+type (
+	AllConfig struct {
+		App
+		Server
+		Data
+	}
 	App struct {
 		Version string
 		Name    string
@@ -23,4 +28,23 @@ type AllConfig struct {
 		RunMode string `mapstructure:"run_mode"`
 		Port    string
 	}
-}
+
+	Data struct {
+		Database
+		Redis
+	}
+	Database struct {
+		Driver string
+		Source string
+	}
+
+	Redis struct {
+		Network      string
+		Addr         string
+		Password     string
+		Db           int32
+		DialTimeout  int32
+		ReadTimeout  int32
+		WriteTimeout int32
+	}
+)
