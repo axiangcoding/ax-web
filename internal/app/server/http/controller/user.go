@@ -47,8 +47,32 @@ func (uc *UserController) UserLogin(c *gin.Context) {
 	return
 }
 
-func (uc *UserController) UserRegister(c *gin.Context) {
+type UserRegister struct {
+	UserName    string `json:"user_name"`
+	PassWordMd5 string `json:"pass_word_md_5"`
+}
 
+func (uc *UserController) UserRegister(c *gin.Context) {
+	req := &UserLogin{}
+	err := c.BindJSON(req)
+	if err != nil {
+		app.BadRequest(c, e.RequestParamsNotValid, err)
+		return
+	}
+	userLogin := &entity.UserLogin{
+		UserName:    req.UserName,
+		PassWordMd5: req.UserName,
+	}
+
+	userLogin, err = uc.uu.UserRegister(c, userLogin)
+	if err != nil {
+		app.BizFailed(c, e.ERROR, err)
+		return
+	}
+	app.Success(c, map[string]string{
+		"user_id": userLogin.UserId,
+	})
+	return
 }
 
 func NewUserController(uu biz.UserUseCase) UserController {

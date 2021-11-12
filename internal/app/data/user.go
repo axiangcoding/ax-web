@@ -11,14 +11,14 @@ import (
 
 type UserRepo interface {
 	UserLogin(ctx context.Context, userLogin *entity.UserLogin) (*entity.UserLogin, error)
-	UserRegister(ctx context.Context, userRegister *entity.UserLogin) (bool, error)
+	UserRegister(ctx context.Context, userRegister *entity.UserLogin) (*entity.UserLogin, error)
 }
 
 type userRepo struct {
 	data *Data
 }
 
-func (u *userRepo) UserRegister(ctx context.Context, userRegister *entity.UserLogin) (bool, error) {
+func (u *userRepo) UserRegister(ctx context.Context, userRegister *entity.UserLogin) (*entity.UserLogin, error) {
 	user := schema.User{
 		UserName:    userRegister.UserName,
 		Email:       userRegister.Email,
@@ -27,9 +27,10 @@ func (u *userRepo) UserRegister(ctx context.Context, userRegister *entity.UserLo
 	}
 	err := u.data.db.Save(&user).Error
 	if err != nil {
-		return false, err
+		return nil, err
 	}
-	return true, err
+	userRegister.UserId = strconv.FormatInt(user.UserId, 10)
+	return userRegister, err
 }
 
 func (u *userRepo) UserLogin(ctx context.Context, userLogin *entity.UserLogin) (*entity.UserLogin, error) {

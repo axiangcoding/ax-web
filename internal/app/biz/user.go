@@ -8,10 +8,15 @@ import (
 
 type UserUseCase interface {
 	UserLogin(ctx context.Context, login *entity.UserLogin) (*entity.UserLogin, error)
+	UserRegister(ctx context.Context, login *entity.UserLogin) (*entity.UserLogin, error)
 }
 
 type userUseCase struct {
 	repo data.UserRepo
+}
+
+func (u *userUseCase) UserRegister(ctx context.Context, login *entity.UserLogin) (*entity.UserLogin, error) {
+	return u.repo.UserRegister(ctx, login)
 }
 
 func (u *userUseCase) UserLogin(ctx context.Context, login *entity.UserLogin) (*entity.UserLogin, error) {
