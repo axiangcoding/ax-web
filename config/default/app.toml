@@ -22,4 +22,9 @@ run_mode = "debug"
 port = 8080
 
 
+[data.database]
+driver="mysql"
+source="root:123456@tcp(127.0.0.1:3306)/user?tls=skip-verify&autocommit=true"
+
+
 

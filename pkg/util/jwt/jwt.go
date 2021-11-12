@@ -1,7 +1,7 @@
 package jwt
 
 import (
-	"gin-template/conf"
+	"gin-template/internal/app/conf"
 	"time"
 
 	"github.com/golang-jwt/jwt"

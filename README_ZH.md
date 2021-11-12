@@ -62,7 +62,7 @@ $ go run main.go
 [GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
 ```
 接着，访问地址：[http://localhost:8080/swagger/index.html](http://localhost:8080/swagger/index.html)，你将看到如下界面：
-![image](docs/swagger-image.png)
+![image](api/docs/swagger-image.png)
 
 接下来，就可以使用啦
 

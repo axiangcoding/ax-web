@@ -1,7 +1,7 @@
 package logging
 
 import (
-	"gin-template/conf"
+	"gin-template/internal/app/conf"
 	"gin-template/pkg/util/file"
 	"io"
 	"os"

@@ -62,7 +62,7 @@ The running information of the project will appear in your console:
 [GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
 ```
 Next, visit the address: [http://localhost:8080/swagger/index.html](http://localhost:8080/swagger/index.html), you will see the following interface:
-![image](docs/swagger-image.png)
+![image](api/docs/swagger-image.png)
 
 Finally, you are free to use!
 

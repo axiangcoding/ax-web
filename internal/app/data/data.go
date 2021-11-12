@@ -1,21 +1,20 @@
 package data
 
 import (
-	"gin-template/conf"
+	"gin-template/internal/app/conf"
 	"github.com/google/wire"
-	"log"
-
-	"gorm.io/driver/postgres"
+	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 
 	// init mysql driver
-	_ "github.com/jinzhu/gorm/dialects/postgres"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
 // ProviderSet is data providers.
 var ProviderSet = wire.NewSet(
 	NewData,
 	NewDB,
+	NewUserRepo,
 )
 
 // Data .
@@ -23,9 +22,9 @@ type Data struct {
 	db *gorm.DB
 }
 
-func NewDB(conf *conf.Data, logger log.Logger) *gorm.DB {
+func NewDB(conf *conf.Data) *gorm.DB {
 
-	db, err := gorm.Open(postgres.Open(conf.Source), &gorm.Config{})
+	db, err := gorm.Open(mysql.Open(conf.Source), &gorm.Config{})
 	if err != nil {
 		panic(err)
 	}
@@ -37,8 +36,7 @@ func NewDB(conf *conf.Data, logger log.Logger) *gorm.DB {
 }
 
 // NewData .
-func NewData(db *gorm.DB, logger log.Logger) (*Data, func(), error) {
-
+func NewData(db *gorm.DB) (*Data, func(), error) {
 	d := &Data{
 		db: db,
 	}
