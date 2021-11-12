@@ -9,7 +9,7 @@ func NewUserRouter(g *gin.RouterGroup, c controller.UserController) *gin.RouterG
 
 	userG := g.Group("user")
 	{
-		userG.POST("login", c.Userlogin)
+		userG.POST("login", c.UserLogin)
 		userG.POST("register", c.UserRegister)
 	}
 	return userG
