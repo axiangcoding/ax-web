@@ -2,6 +2,7 @@ package data
 
 import (
 	"gin-template/internal/app/conf"
+	"gin-template/internal/app/data/schema"
 	"github.com/google/wire"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -29,7 +30,9 @@ func NewDB(conf *conf.Data) *gorm.DB {
 		panic(err)
 	}
 
-	if err := db.AutoMigrate(); err != nil {
+	if err := db.AutoMigrate(
+		&schema.User{},
+	); err != nil {
 		panic(err)
 	}
 	return db
