@@ -1,6 +1,7 @@
+.PHONY: run
 run:
 	pwd&&cd cmd/app/ && go run .
-.PHONY: run
+
 
 .PHONY: generate
 
