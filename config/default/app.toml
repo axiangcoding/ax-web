@@ -24,7 +24,7 @@ port = 8080
 
 [data.database]
 driver="mysql"
-source="root:123456@tcp(127.0.0.1:3306)/user?tls=skip-verify&autocommit=true"
+source="axiangcoding:axiangP@ssword@tcp(127.0.0.1:3306)/some_db?tls=skip-verify&autocommit=true"
 
 
 
