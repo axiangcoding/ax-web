@@ -1,7 +1,8 @@
 package v1
 
 import (
-	jwt_util "gin-template/core/util/jwt"
+	"gin-template/internal/app/data"
+	jwt_util "gin-template/pkg/util/jwt"
 
 	"github.com/gin-gonic/gin"
 )
@@ -26,4 +27,16 @@ func UserLogin(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"token": token,
 	})
+}
+
+// UserRegister
+// @Summary 测试用户注册
+// @Tags login
+// @Produce  json
+// @Param user_id query string false "user id"
+// @Success 200 {string} json ""
+// @Router /api/v1/register [post]
+func UserRegister(c *gin.Context) {
+	register, _ := data.UserRegister(c)
+	print(register)
 }

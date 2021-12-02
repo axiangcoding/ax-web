@@ -1,8 +1,8 @@
 package logging
 
 import (
-	"gin-template/core/setting"
-	"gin-template/core/util/file"
+	"gin-template/internal/app/conf"
+	"gin-template/pkg/util/file"
 	"io"
 	"os"
 	"path"
@@ -19,7 +19,7 @@ var logConsole *zap.SugaredLogger
 var enableFileLog = false
 
 func Setup() {
-	enableFileLog = setting.Config.App.Log.File.Enable
+	enableFileLog = conf.Config.App.Log.File.Enable
 	logger, _ := zap.NewDevelopment()
 	logConsole = logger.Sugar()
 
@@ -32,7 +32,7 @@ func Setup() {
 
 		// 设置application的日志输出
 		zapLevel := zapcore.InfoLevel
-		level := setting.Config.App.Log.Level
+		level := conf.Config.App.Log.Level
 		switch level {
 		case "info":
 			zapLevel = zapcore.InfoLevel
@@ -46,7 +46,7 @@ func Setup() {
 		// lumberjack.Logger is already safe for concurrent use, so we don't need to
 		// lock it.
 		w := zapcore.AddSync(&lumberjack.Logger{
-			Filename: path.Join(setting.Config.App.Log.File.Path,
+			Filename: path.Join(conf.Config.App.Log.File.Path,
 				"application.log"),
 			MaxSize:    500, // megabytes
 			MaxBackups: 3,
@@ -65,7 +65,7 @@ func Setup() {
 }
 
 func CreateLogFile(fileName string) *os.File {
-	logPath := setting.Config.App.Log.File.Path
+	logPath := conf.Config.App.Log.File.Path
 	if err := file.MkdirIfNotExist(logPath); err != nil {
 		Error(err)
 	}

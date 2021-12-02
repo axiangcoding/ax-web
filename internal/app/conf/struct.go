@@ -1,4 +1,4 @@
-package setting
+package conf
 
 type AllConfig struct {
 	App struct {
@@ -17,6 +17,14 @@ type AllConfig struct {
 		}
 		Swagger struct {
 			Enable bool
+		}
+		Data struct {
+			Database struct {
+				Driver      string
+				Source      string
+				MaxIdleConn int `mapstructure:"max_idle_conn"`
+				MaxOpenConn int `mapstructure:"max_open_conn"`
+			}
 		}
 	}
 	Server struct {

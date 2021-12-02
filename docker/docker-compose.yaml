@@ -10,18 +10,18 @@ services:
       MYSQL_PASSWORD: axiangP@ssword
       MYSQL_DATABASE: some_db
     ports: 
-      - 3306:3306
+      - "3306:3306"
     volumes:
       - ./volume/mysql:/var/lib/mysql
   phpmyadmin:
     image: phpmyadmin
     # restart: always
     ports:
-      - 80:80
+      - "80:80"
     environment:
       - PMA_ARBITRARY=1
   redis:
     image: redis:6.0.9-alpine
     # restart: always
     ports: 
-      - 6379:6379
+      - "6379:6379"

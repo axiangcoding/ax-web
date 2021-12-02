@@ -16,6 +16,13 @@ expire_duration = "1h"
 [app.swagger]
 enable = true
 
+[app.data.database]
+driver="mysql"
+source = "axiangcoding:axiangP@ssword@tcp(127.0.0.1:3306)/some_db?charset=utf8mb4"
+max_open_conn=100
+max_idle_conn=10
+
+
 [server]
 run_mode = "debug"
 port = 8080

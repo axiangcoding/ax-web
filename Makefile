@@ -1,4 +1,4 @@
-.PHONY: all swag clean check build-image run help
+.PHONY: all swag clean check build-image run help run-dev-env
 
 all: swag run
 
@@ -19,6 +19,10 @@ build-image:
 
 run:
 	go run ./
+
+run-dev-env:
+	@echo "docker-compose required"
+	docker-compose -f docker/docker-compose.yaml up -d
 
 help:
 	@echo "make - generate swagger docs, run application"

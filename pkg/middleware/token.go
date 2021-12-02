@@ -1,8 +1,8 @@
 package middleware
 
 import (
-	"gin-template/core/logging"
-	jwt_util "gin-template/core/util/jwt"
+	"gin-template/pkg/logging"
+	jwt_util "gin-template/pkg/util/jwt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"

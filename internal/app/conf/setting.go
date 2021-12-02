@@ -1,4 +1,4 @@
-package setting
+package conf
 
 import (
 	"log"
@@ -17,7 +17,7 @@ func Setup() {
 	viper.AddConfigPath("config/default/")
 	if err := viper.ReadInConfig(); err != nil {
 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
-			log.Println("Config file not found. The program will use default setting and may not work properly")
+			log.Println("Config file not found. The program will use default conf and may not work properly")
 		}
 	}
 	err := viper.Unmarshal(&Config)

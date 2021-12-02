@@ -1,7 +1,7 @@
 package v1
 
 import (
-	"gin-template/core/logging"
+	"gin-template/pkg/logging"
 
 	"github.com/gin-gonic/gin"
 )

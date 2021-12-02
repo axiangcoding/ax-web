@@ -75,6 +75,23 @@ paths:
       summary: 测试用户登录
       tags:
       - login
+  /api/v1/register:
+    post:
+      parameters:
+      - description: user id
+        in: query
+        name: user_id
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 测试用户注册
+      tags:
+      - login
   /api/v1/test/test-log:
     get:
       produces:
