@@ -6,6 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// UserLogin
 // @Summary 测试用户登录
 // @Tags login
 // @Produce  json
@@ -13,8 +14,8 @@ import (
 // @Success 200 {string} json ""
 // @Router /api/v1/login [post]
 func UserLogin(c *gin.Context) {
-	user_id := c.Query("user_id")
-	token, err := jwt_util.CreateToken(user_id)
+	userId := c.Query("user_id")
+	token, err := jwt_util.CreateToken(userId)
 	if err != nil {
 		println(err.Error())
 		c.JSON(500, gin.H{

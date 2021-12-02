@@ -4,8 +4,8 @@ name = "axiangcoding/go-gin-template"
 
 [app.log]
 level = "INFO"
-filelog.enable = false
-filelog.path = "./logs/"
+file.enable = false
+file.path = "./logs/"
 
 
 [app.token]

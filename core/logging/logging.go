@@ -19,7 +19,7 @@ var logConsole *zap.SugaredLogger
 var enableFileLog = false
 
 func Setup() {
-	enableFileLog = setting.Config.App.Log.FileLog.Enable
+	enableFileLog = setting.Config.App.Log.File.Enable
 	logger, _ := zap.NewDevelopment()
 	logConsole = logger.Sugar()
 
@@ -46,7 +46,7 @@ func Setup() {
 		// lumberjack.Logger is already safe for concurrent use, so we don't need to
 		// lock it.
 		w := zapcore.AddSync(&lumberjack.Logger{
-			Filename: path.Join(setting.Config.App.Log.FileLog.Path,
+			Filename: path.Join(setting.Config.App.Log.File.Path,
 				"application.log"),
 			MaxSize:    500, // megabytes
 			MaxBackups: 3,
@@ -65,7 +65,7 @@ func Setup() {
 }
 
 func CreateLogFile(fileName string) *os.File {
-	logPath := setting.Config.App.Log.FileLog.Path
+	logPath := setting.Config.App.Log.File.Path
 	if err := file.MkdirIfNotExist(logPath); err != nil {
 		Error(err)
 	}

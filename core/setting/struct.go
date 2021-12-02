@@ -5,8 +5,8 @@ type AllConfig struct {
 		Version string
 		Name    string
 		Log     struct {
-			Level   string
-			FileLog struct {
+			Level string
+			File  struct {
 				Enable bool
 				Path   string
 			}
