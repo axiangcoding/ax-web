@@ -22,7 +22,7 @@ func Setup() {
 	}
 	err := viper.Unmarshal(&Config)
 	if err != nil {
-		log.Fatalf("Unable to decode into struct, %v", err)
+		log.Fatalf("Config Properties unable to decode into struct, %v", err)
 	}
 
 }

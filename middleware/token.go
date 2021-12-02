@@ -19,7 +19,7 @@ func Token() gin.HandlerFunc {
 			c.Abort()
 			return
 		}
-		cc, err := jwt_util.ParseToken(tokenString)
+		_, err := jwt_util.ParseToken(tokenString)
 		if err != nil {
 			if ve, ok := err.(*jwt.ValidationError); ok {
 				if ve.Errors&jwt.ValidationErrorMalformed != 0 {
@@ -36,6 +36,5 @@ func Token() gin.HandlerFunc {
 			return
 		}
 		c.Next()
-		logging.Info(cc.CustomerInfo)
 	}
 }

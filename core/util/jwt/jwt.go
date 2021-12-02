@@ -1,6 +1,7 @@
 package jwt
 
 import (
+	"gin-template/core/logging"
 	"gin-template/core/setting"
 	"time"
 
@@ -8,6 +9,7 @@ import (
 )
 
 var jwtSecret []byte
+var expireDuration time.Duration
 
 type CustomerInfo struct {
 	UserID string `json:"user_id"`
@@ -21,6 +23,12 @@ type CustomClaims struct {
 
 func Setup() {
 	jwtSecret = []byte(setting.Config.App.Token.Secret)
+	expireStr := setting.Config.App.Token.ExpireDuration
+	expire, err := time.ParseDuration(expireStr)
+	if err != nil {
+		logging.Fatal("Config properties: app.token.expire_duration not valid")
+	}
+	expireDuration = expire
 }
 
 // CreateToken generate tokens used for auth
@@ -28,7 +36,7 @@ func CreateToken(username string) (string, error) {
 	t := jwt.New(jwt.SigningMethodHS256)
 	t.Claims = &CustomClaims{
 		&jwt.StandardClaims{
-			ExpiresAt: time.Now().Add(time.Minute * 1).Unix(),
+			ExpiresAt: time.Now().Add(expireDuration).Unix(),
 			IssuedAt:  time.Now().Unix(),
 			Issuer:    "axiangcoding",
 		},
