@@ -3,22 +3,17 @@ package data
 import (
 	"context"
 	"gin-template/internal/app/data/schema"
+	"gin-template/pkg/logging"
 	"strconv"
 )
 
-func UserRegister(ctx context.Context) (string, error) {
-	email := "test"
-	phone := "phone"
-	user := schema.User{
-		UserName: "Abc",
-		Email:    &email,
-		Phone:    &phone,
-		Password: "abcdedf",
-	}
+func UserRegister(ctx context.Context, user schema.User) (string, error) {
+	user.GenerateId()
+	logging.Info(user.UserId)
 	err := GetDB().Save(&user).Error
 	if err != nil {
 		return "", err
 	}
-	id := strconv.FormatInt(int64(user.UserId), 10)
+	id := strconv.FormatInt(user.UserId, 10)
 	return id, err
 }

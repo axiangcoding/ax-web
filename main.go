@@ -39,6 +39,9 @@ func init() {
 // @securityDefinitions.apikey ApiKeyAuth
 // @in header
 // @name token
+
+// @accept json
+// @produce json
 func main() {
 	runMode := conf.Config.Server.RunMode
 	gin.SetMode(runMode)

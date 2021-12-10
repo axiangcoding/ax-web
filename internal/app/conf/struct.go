@@ -26,6 +26,9 @@ type AllConfig struct {
 				MaxOpenConn int `mapstructure:"max_open_conn"`
 			}
 		}
+		Response struct {
+			HideErrorDetails bool `mapstructure:"hide_error_details"`
+		}
 	}
 	Server struct {
 		RunMode string `mapstructure:"run_mode"`

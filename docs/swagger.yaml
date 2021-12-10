@@ -1,9 +1,33 @@
 definitions:
+  app.ApiJson:
+    properties:
+      code:
+        type: integer
+      data: {}
+      msg:
+        type: string
+    type: object
+  app.ErrJson:
+    properties:
+      err:
+        type: string
+    type: object
   v1.Params:
     properties:
       param1:
         type: string
       param2:
+        type: string
+    type: object
+  v1.RegisterForm:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+      userName:
         type: string
     type: object
 info:
@@ -58,40 +82,6 @@ paths:
       summary: demo，测试post
       tags:
       - demo
-  /api/v1/login:
-    post:
-      parameters:
-      - description: user id
-        in: query
-        name: user_id
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: string
-      summary: 测试用户登录
-      tags:
-      - login
-  /api/v1/register:
-    post:
-      parameters:
-      - description: user id
-        in: query
-        name: user_id
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: string
-      summary: 测试用户注册
-      tags:
-      - login
   /api/v1/test/test-log:
     get:
       produces:
@@ -106,6 +96,41 @@ paths:
       summary: demo，测试post
       tags:
       - demo
+  /api/v1/user/login:
+    post:
+      parameters:
+      - description: user id
+        in: query
+        name: user_id
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 测试用户登录
+      tags:
+      - user
+  /api/v1/user/register:
+    post:
+      parameters:
+      - description: register form
+        in: body
+        name: form
+        schema:
+          $ref: '#/definitions/v1.RegisterForm'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.ApiJson'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.ErrJson'
+      summary: 用户注册
+      tags:
+      - user
 securityDefinitions:
   ApiKeyAuth:
     in: header

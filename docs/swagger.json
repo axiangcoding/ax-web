@@ -83,60 +83,6 @@
                 }
             }
         },
-        "/api/v1/login": {
-            "post": {
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "login"
-                ],
-                "summary": "测试用户登录",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "user id",
-                        "name": "user_id",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
-        "/api/v1/register": {
-            "post": {
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "login"
-                ],
-                "summary": "测试用户注册",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "user id",
-                        "name": "user_id",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
         "/api/v1/test/test-log": {
             "get": {
                 "security": [
@@ -160,9 +106,85 @@
                     }
                 }
             }
+        },
+        "/api/v1/user/login": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "测试用户登录",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "user id",
+                        "name": "user_id",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/user/register": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "用户注册",
+                "parameters": [
+                    {
+                        "description": "register form",
+                        "name": "form",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/v1.RegisterForm"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/app.ApiJson"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/app.ErrJson"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
+        "app.ApiJson": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {},
+                "msg": {
+                    "type": "string"
+                }
+            }
+        },
+        "app.ErrJson": {
+            "type": "object",
+            "properties": {
+                "err": {
+                    "type": "string"
+                }
+            }
+        },
         "v1.Params": {
             "type": "object",
             "properties": {
@@ -170,6 +192,23 @@
                     "type": "string"
                 },
                 "param2": {
+                    "type": "string"
+                }
+            }
+        },
+        "v1.RegisterForm": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "userName": {
                     "type": "string"
                 }
             }

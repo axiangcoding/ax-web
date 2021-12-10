@@ -1,6 +1,7 @@
 package app
 
 import (
+	"gin-template/internal/app/conf"
 	"gin-template/pkg/app/e"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -32,7 +33,8 @@ func HttpResponse(c *gin.Context, httpCode int, msgCode int, data interface{}) {
 
 // BizFailed business failed response
 func BizFailed(c *gin.Context, errCode int, err ...error) {
-	if len(err) > 0 && err[0] != nil {
+	hideDetail := conf.Config.App.Response.HideErrorDetails
+	if len(err) > 0 && err[0] != nil && !hideDetail {
 		HttpResponse(c, http.StatusOK, errCode, ErrJson{Err: err[0].Error()})
 	} else {
 		HttpResponse(c, http.StatusOK, errCode, nil)
@@ -41,7 +43,8 @@ func BizFailed(c *gin.Context, errCode int, err ...error) {
 
 // ServerFailed server internal failed response
 func ServerFailed(c *gin.Context, errCode int, err ...error) {
-	if len(err) > 0 && err[0] != nil {
+	hideDetail := conf.Config.App.Response.HideErrorDetails
+	if len(err) > 0 && err[0] != nil && !hideDetail {
 		HttpResponse(c, http.StatusInternalServerError, errCode, ErrJson{Err: err[0].Error()})
 	} else {
 		HttpResponse(c, http.StatusInternalServerError, errCode, nil)
@@ -50,7 +53,8 @@ func ServerFailed(c *gin.Context, errCode int, err ...error) {
 
 //Unauthorized authorized failed response
 func Unauthorized(c *gin.Context, errCode int, err ...error) {
-	if len(err) > 0 && err[0] != nil {
+	hideDetail := conf.Config.App.Response.HideErrorDetails
+	if len(err) > 0 && err[0] != nil && !hideDetail {
 		HttpResponse(c, http.StatusUnauthorized, errCode, ErrJson{Err: err[0].Error()})
 	} else {
 		HttpResponse(c, http.StatusUnauthorized, errCode, nil)

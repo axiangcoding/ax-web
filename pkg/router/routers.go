@@ -30,8 +30,12 @@ func InitRouter() *gin.Engine {
 		{
 			test.GET("/test-log", v1.TestLog)
 		}
-		groupV1.POST("/login", v1.UserLogin)
-		groupV1.POST("/register", v1.UserRegister)
+		user := groupV1.Group("/user")
+		{
+			user.POST("/login", v1.UserLogin)
+			user.POST("/register", v1.UserRegister)
+		}
+
 	}
 
 	if conf.Config.App.Swagger.Enable {

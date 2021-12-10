@@ -20,7 +20,7 @@ func initDB() *gorm.DB {
 	if err != nil {
 		logging.Fatal(err)
 	}
-	//auto migrate should not use
+	//auto migrate should not be used
 	if err := db.AutoMigrate(
 		&schema.User{},
 	); err != nil {

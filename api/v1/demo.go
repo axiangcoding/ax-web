@@ -29,6 +29,7 @@ type Params struct {
 	Param2 string `json:"param2"`
 }
 
+// DemoPost
 // @Summary demo，测试post
 // @Produce  json
 // @Tags demo
