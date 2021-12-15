@@ -6,3 +6,8 @@ type UserRegister struct {
 	Phone    *string
 	Password string
 }
+
+type UserLogin struct {
+	UserId   int64
+	Password string
+}

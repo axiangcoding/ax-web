@@ -12,6 +12,13 @@ definitions:
       err:
         type: string
     type: object
+  v1.LoginForm:
+    properties:
+      password:
+        type: string
+      userId:
+        type: integer
+    type: object
   v1.Params:
     properties:
       param1:
@@ -99,16 +106,22 @@ paths:
   /api/v1/user/login:
     post:
       parameters:
-      - description: user id
-        in: query
-        name: user_id
-        type: string
+      - description: register form
+        in: body
+        name: form
+        required: true
+        schema:
+          $ref: '#/definitions/v1.LoginForm'
       responses:
         "200":
           description: OK
           schema:
-            type: string
-      summary: 测试用户登录
+            $ref: '#/definitions/app.ApiJson'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/app.ErrJson'
+      summary: User login
       tags:
       - user
   /api/v1/user/register:
@@ -117,6 +130,7 @@ paths:
       - description: register form
         in: body
         name: form
+        required: true
         schema:
           $ref: '#/definitions/v1.RegisterForm'
       responses:
@@ -128,7 +142,7 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/app.ErrJson'
-      summary: 用户注册
+      summary: User register
       tags:
       - user
 securityDefinitions:

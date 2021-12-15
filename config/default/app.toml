@@ -16,7 +16,7 @@ enable = true
 
 [app.data.database]
 driver = "mysql"
-source = "axiangcoding:axiangP@ssword@tcp(127.0.0.1:3306)/some_db?charset=utf8mb4"
+source = "axiangcoding:axiangP@ssword@tcp(127.0.0.1:3306)/some_db?charset=utf8mb4&parseTime=true"
 max_open_conn = 100
 max_idle_conn = 10
 

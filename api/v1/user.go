@@ -5,29 +5,40 @@ import (
 	"gin-template/internal/app/service"
 	"gin-template/pkg/app"
 	"gin-template/pkg/app/e"
-	jwt_util "gin-template/pkg/util/jwt"
 	"github.com/gin-gonic/gin"
 )
 
+type LoginForm struct {
+	UserId   int64
+	Password string
+}
+
 // UserLogin
-// @Summary 测试用户登录
+// @Summary User login
 // @Tags user
-// @Param user_id query string false "user id"
-// @Success 200 {string} json ""
+// @Param form body LoginForm true "register form"
+// @Success 200 {object} app.ApiJson ""
+// @Failure 500 {object} app.ErrJson ""
 // @Router /api/v1/user/login [post]
 func UserLogin(c *gin.Context) {
-	userId := c.Query("user_id")
-	token, err := jwt_util.CreateToken(userId)
+	form := LoginForm{}
+	err := c.BindJSON(&form)
 	if err != nil {
-		println(err.Error())
-		c.JSON(500, gin.H{
-			"token": err,
-		})
+		app.BizFailed(c, e.RequestParamsNotValid, err)
 		return
 	}
-	c.JSON(200, gin.H{
-		"token": token,
-	})
+
+	login := entity.UserLogin{
+		UserId:   form.UserId,
+		Password: form.Password,
+	}
+
+	token, err := service.UserLogin(c, login)
+	if err != nil {
+		app.BizFailed(c, e.LoginFailed, err)
+		return
+	}
+	app.Success(c, map[string]string{"token": token})
 }
 
 type RegisterForm struct {
@@ -38,9 +49,9 @@ type RegisterForm struct {
 }
 
 // UserRegister
-// @Summary 用户注册
+// @Summary User register
 // @Tags user
-// @Param form body RegisterForm false "register form"
+// @Param form body RegisterForm true "register form"
 // @Success 200 {object} app.ApiJson ""
 // @Failure 500 {object} app.ErrJson ""
 // @Router /api/v1/user/register [post]
@@ -59,8 +70,8 @@ func UserRegister(c *gin.Context) {
 	}
 	id, err := service.UserRegister(c, register)
 	if err != nil {
-		app.BizFailed(c, e.Error, err)
+		app.BizFailed(c, e.RegisterFailed, err)
 		return
 	}
-	app.Success(c, id)
+	app.Success(c, map[string]string{"id": id})
 }

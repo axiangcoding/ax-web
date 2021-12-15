@@ -3,8 +3,13 @@ package e
 // MsgFlags Code message map
 var MsgFlags = map[int]string{
 	Success:               "ok",
-	Error:                 "err",
+	Error:                 "system error",
 	RequestParamsNotValid: "request params not valid",
+	TokenNotExist:         "token not exist",
+	TokenNotLegal:         "token is required",
+	TokenExpired:          "token expired",
+	LoginFailed:           "login failed",
+	RegisterFailed:        "register failed",
 }
 
 // GetMsg get error information based on Code

@@ -128,20 +128,29 @@ var doc = `{
                 "tags": [
                     "user"
                 ],
-                "summary": "测试用户登录",
+                "summary": "User login",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "user id",
-                        "name": "user_id",
-                        "in": "query"
+                        "description": "register form",
+                        "name": "form",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/v1.LoginForm"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/app.ApiJson"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/app.ErrJson"
                         }
                     }
                 }
@@ -152,12 +161,13 @@ var doc = `{
                 "tags": [
                     "user"
                 ],
-                "summary": "用户注册",
+                "summary": "User register",
                 "parameters": [
                     {
                         "description": "register form",
                         "name": "form",
                         "in": "body",
+                        "required": true,
                         "schema": {
                             "$ref": "#/definitions/v1.RegisterForm"
                         }
@@ -198,6 +208,17 @@ var doc = `{
             "properties": {
                 "err": {
                     "type": "string"
+                }
+            }
+        },
+        "v1.LoginForm": {
+            "type": "object",
+            "properties": {
+                "password": {
+                    "type": "string"
+                },
+                "userId": {
+                    "type": "integer"
                 }
             }
         },

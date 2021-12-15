@@ -57,5 +57,4 @@ func TestLog(c *gin.Context) {
 	logging.Info("this is a info log")
 	logging.Info("this is a info log with params", "value1")
 	logging.Warn("this is a warn log")
-	logging.Fatal("this is a fatal log")
 }
