@@ -1,8 +1,8 @@
 package jwt
 
 import (
-	"gin-template/internal/app/conf"
-	"gin-template/pkg/logging"
+	"axiangcoding/go-gin-template/internal/app/conf"
+	"axiangcoding/go-gin-template/pkg/logging"
 	"time"
 
 	"github.com/golang-jwt/jwt"

@@ -1,7 +1,7 @@
 package schema
 
 import (
-	"gin-template/pkg/logging"
+	"axiangcoding/go-gin-template/pkg/logging"
 	"github.com/bwmarrin/snowflake"
 	"gorm.io/gorm"
 )

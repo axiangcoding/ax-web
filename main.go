@@ -1,13 +1,13 @@
 package main
 
 import (
+	"axiangcoding/go-gin-template/internal/app/conf"
+	"axiangcoding/go-gin-template/internal/app/data"
+	"axiangcoding/go-gin-template/pkg/logging"
+	"axiangcoding/go-gin-template/pkg/router"
+	jwt_util "axiangcoding/go-gin-template/pkg/util/jwt"
 	"context"
 	"fmt"
-	"gin-template/internal/app/conf"
-	"gin-template/internal/app/data"
-	"gin-template/pkg/logging"
-	"gin-template/pkg/router"
-	jwt_util "gin-template/pkg/util/jwt"
 	"net/http"
 	"os"
 	"os/signal"

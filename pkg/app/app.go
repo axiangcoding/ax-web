@@ -1,8 +1,8 @@
 package app
 
 import (
-	"gin-template/internal/app/conf"
-	"gin-template/pkg/app/e"
+	"axiangcoding/go-gin-template/internal/app/conf"
+	"axiangcoding/go-gin-template/pkg/app/e"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )

@@ -1,7 +1,7 @@
 package v1
 
 import (
-	"gin-template/pkg/logging"
+	"axiangcoding/go-gin-template/pkg/logging"
 
 	"github.com/gin-gonic/gin"
 )
