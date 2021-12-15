@@ -4,18 +4,25 @@ name = "axiangcoding/go-gin-template"
 
 [app.log]
 level = "INFO"
-filelog.enable = false
-filelog.path = "./logs/"
-
+file.enable = false
+file.path = "./logs/"
 
 [app.token]
 secret = "randomSecret"
-# TODO 设置token的过期时间
 expire_duration = "1h"
-
 
 [app.swagger]
 enable = true
+
+[app.data.database]
+driver = "mysql"
+source = "axiangcoding:axiangP@ssword@tcp(127.0.0.1:3306)/some_db?charset=utf8mb4&parseTime=true"
+max_open_conn = 100
+max_idle_conn = 10
+
+[app.response]
+# hide error details
+hide_error_details = false
 
 [server]
 run_mode = "debug"

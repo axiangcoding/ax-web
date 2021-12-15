@@ -3,10 +3,11 @@ package main
 import (
 	"context"
 	"fmt"
-	"gin-template/core/logging"
-	"gin-template/core/setting"
-	jwt_util "gin-template/core/util/jwt"
-	"gin-template/routers"
+	"gin-template/internal/app/conf"
+	"gin-template/internal/app/data"
+	"gin-template/pkg/logging"
+	"gin-template/pkg/router"
+	jwt_util "gin-template/pkg/util/jwt"
 	"net/http"
 	"os"
 	"os/signal"
@@ -17,8 +18,9 @@ import (
 )
 
 func init() {
-	setting.Setup()
+	conf.Setup()
 	logging.Setup()
+	data.Setup()
 	jwt_util.Setup()
 }
 
@@ -37,12 +39,15 @@ func init() {
 // @securityDefinitions.apikey ApiKeyAuth
 // @in header
 // @name token
+
+// @accept json
+// @produce json
 func main() {
-	runMode := setting.Config.Server.RunMode
+	runMode := conf.Config.Server.RunMode
 	gin.SetMode(runMode)
-	r := routers.InitRouter()
+	r := router.InitRouter()
 	srv := &http.Server{
-		Addr:    fmt.Sprintf(":%s", setting.Config.Server.Port),
+		Addr:    fmt.Sprintf(":%s", conf.Config.Server.Port),
 		Handler: r,
 	}
 
@@ -53,7 +58,7 @@ func main() {
 		}
 	}()
 
-	logging.Infof("Server start at port: %s", setting.Config.Server.Port)
+	logging.Infof("Server start at port: %s", conf.Config.Server.Port)
 
 	// 等待中断信号来优雅停止服务器，设置的5秒延迟
 	quit := make(chan os.Signal, 1)
