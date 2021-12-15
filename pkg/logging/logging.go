@@ -1,8 +1,8 @@
 package logging
 
 import (
-	"gin-template/internal/app/conf"
-	"gin-template/pkg/util/file"
+	"axiangcoding/go-gin-template/internal/app/conf"
+	"axiangcoding/go-gin-template/pkg/util/file"
 	"io"
 	"os"
 	"path"

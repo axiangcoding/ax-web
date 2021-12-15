@@ -1,9 +1,9 @@
 package data
 
 import (
-	"gin-template/internal/app/conf"
-	"gin-template/internal/app/data/schema"
-	"gin-template/pkg/logging"
+	"axiangcoding/go-gin-template/internal/app/conf"
+	"axiangcoding/go-gin-template/internal/app/data/schema"
+	"axiangcoding/go-gin-template/pkg/logging"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )

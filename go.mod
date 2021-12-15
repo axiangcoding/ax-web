@@ -1,8 +1,9 @@
-module gin-template
+module axiangcoding/go-gin-template
 
 go 1.17
 
 require (
+	github.com/bwmarrin/snowflake v0.3.0
 	github.com/gin-gonic/gin v1.7.4
 	github.com/golang-jwt/jwt v3.2.2+incompatible
 	github.com/swaggo/files v0.0.0-20210815190702-a29dd2bc99b2
@@ -18,7 +19,6 @@ require (
 	github.com/KyleBanks/depth v1.2.1 // indirect
 	github.com/PuerkitoBio/purell v1.1.1 // indirect
 	github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578 // indirect
-	github.com/bwmarrin/snowflake v0.3.0 // indirect
 	github.com/fsnotify/fsnotify v1.5.1 // indirect
 	github.com/go-openapi/jsonpointer v0.19.5 // indirect
 	github.com/go-openapi/jsonreference v0.19.6 // indirect
