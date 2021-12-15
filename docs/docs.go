@@ -180,6 +180,12 @@ var doc = `{
                             "$ref": "#/definitions/app.ApiJson"
                         }
                     },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/app.ErrJson"
+                        }
+                    },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {

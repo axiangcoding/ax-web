@@ -22,9 +22,9 @@ type LoginForm struct {
 // @Router /api/v1/user/login [post]
 func UserLogin(c *gin.Context) {
 	form := LoginForm{}
-	err := c.BindJSON(&form)
+	err := c.ShouldBindJSON(&form)
 	if err != nil {
-		app.BizFailed(c, e.RequestParamsNotValid, err)
+		app.BadRequest(c, e.RequestParamsNotValid, err)
 		return
 	}
 
@@ -42,9 +42,9 @@ func UserLogin(c *gin.Context) {
 }
 
 type RegisterForm struct {
-	UserName string
-	Email    *string
-	Phone    *string
+	UserName string  `binding:"alphanum"`
+	Email    *string `binding:"email"`
+	Phone    *string `binding:"e164"`
 	Password string
 }
 
@@ -57,9 +57,9 @@ type RegisterForm struct {
 // @Router /api/v1/user/register [post]
 func UserRegister(c *gin.Context) {
 	regForm := RegisterForm{}
-	err := c.BindJSON(&regForm)
+	err := c.ShouldBindJSON(&regForm)
 	if err != nil {
-		app.BizFailed(c, e.RequestParamsNotValid, err)
+		app.BadRequest(c, e.RequestParamsNotValid, err)
 		return
 	}
 	register := entity.UserRegister{
