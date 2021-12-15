@@ -1,10 +1,10 @@
 package router
 
 import (
-	v1 "axiangcoding/go-gin-template/api/v1"
-	docs "axiangcoding/go-gin-template/docs"
-	"axiangcoding/go-gin-template/internal/app/conf"
-	"axiangcoding/go-gin-template/pkg/middleware"
+	v1 "github.com/axiangcoding/go-gin-template/api/v1"
+	docs "github.com/axiangcoding/go-gin-template/docs"
+	"github.com/axiangcoding/go-gin-template/internal/app/conf"
+	"github.com/axiangcoding/go-gin-template/pkg/middleware"
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"

@@ -1,10 +1,10 @@
 package v1
 
 import (
-	"axiangcoding/go-gin-template/internal/app/entity"
-	"axiangcoding/go-gin-template/internal/app/service"
-	"axiangcoding/go-gin-template/pkg/app"
-	"axiangcoding/go-gin-template/pkg/app/e"
+	"github.com/axiangcoding/go-gin-template/internal/app/entity"
+	"github.com/axiangcoding/go-gin-template/internal/app/service"
+	"github.com/axiangcoding/go-gin-template/pkg/app"
+	"github.com/axiangcoding/go-gin-template/pkg/app/e"
 	"github.com/gin-gonic/gin"
 )
 

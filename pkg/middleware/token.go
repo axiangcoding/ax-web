@@ -1,9 +1,9 @@
 package middleware
 
 import (
-	"axiangcoding/go-gin-template/pkg/app"
-	"axiangcoding/go-gin-template/pkg/app/e"
-	jwt_util "axiangcoding/go-gin-template/pkg/util/jwt"
+	"github.com/axiangcoding/go-gin-template/pkg/app"
+	"github.com/axiangcoding/go-gin-template/pkg/app/e"
+	jwt_util "github.com/axiangcoding/go-gin-template/pkg/util/jwt"
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt"
 )

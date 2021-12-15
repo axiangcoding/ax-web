@@ -1,10 +1,10 @@
 package service
 
 import (
-	"axiangcoding/go-gin-template/internal/app/data"
-	"axiangcoding/go-gin-template/internal/app/data/schema"
-	"axiangcoding/go-gin-template/internal/app/entity"
-	jwt_util "axiangcoding/go-gin-template/pkg/util/jwt"
+	"github.com/axiangcoding/go-gin-template/internal/app/data"
+	"github.com/axiangcoding/go-gin-template/internal/app/data/schema"
+	"github.com/axiangcoding/go-gin-template/internal/app/entity"
+	jwt_util "github.com/axiangcoding/go-gin-template/pkg/util/jwt"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
 	"strconv"

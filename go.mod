@@ -1,4 +1,4 @@
-module axiangcoding/go-gin-template
+module github.com/axiangcoding/go-gin-template
 
 go 1.17
 
