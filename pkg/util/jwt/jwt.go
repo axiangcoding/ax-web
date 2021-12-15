@@ -1,8 +1,8 @@
 package jwt
 
 import (
-	"gin-template/core/logging"
-	"gin-template/core/setting"
+	"gin-template/internal/app/conf"
+	"gin-template/pkg/logging"
 	"time"
 
 	"github.com/golang-jwt/jwt"
@@ -22,8 +22,8 @@ type CustomClaims struct {
 }
 
 func Setup() {
-	jwtSecret = []byte(setting.Config.App.Token.Secret)
-	expireStr := setting.Config.App.Token.ExpireDuration
+	jwtSecret = []byte(conf.Config.App.Token.Secret)
+	expireStr := conf.Config.App.Token.ExpireDuration
 	expire, err := time.ParseDuration(expireStr)
 	if err != nil {
 		logging.Fatal("Config properties: app.token.expire_duration not valid")

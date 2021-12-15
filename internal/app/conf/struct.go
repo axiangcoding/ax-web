@@ -1,12 +1,12 @@
-package setting
+package conf
 
 type AllConfig struct {
 	App struct {
 		Version string
 		Name    string
 		Log     struct {
-			Level   string
-			FileLog struct {
+			Level string
+			File  struct {
 				Enable bool
 				Path   string
 			}
@@ -17,6 +17,17 @@ type AllConfig struct {
 		}
 		Swagger struct {
 			Enable bool
+		}
+		Data struct {
+			Database struct {
+				Driver      string
+				Source      string
+				MaxIdleConn int `mapstructure:"max_idle_conn"`
+				MaxOpenConn int `mapstructure:"max_open_conn"`
+			}
+		}
+		Response struct {
+			HideErrorDetails bool `mapstructure:"hide_error_details"`
 		}
 	}
 	Server struct {

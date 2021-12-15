@@ -1,4 +1,4 @@
-package setting
+package conf
 
 import (
 	"log"
@@ -17,7 +17,7 @@ func Setup() {
 	viper.AddConfigPath("config/default/")
 	if err := viper.ReadInConfig(); err != nil {
 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
-			log.Println("Config file not foud. The program will use default setting and may not work properly")
+			log.Println("Config file not found. The program will use default conf and may not work properly")
 		}
 	}
 	err := viper.Unmarshal(&Config)
@@ -33,8 +33,8 @@ func setDefault() {
 	viper.SetDefault("app.version", "0.0.1")
 	viper.SetDefault("app.name", "axiangcoding/go-gin-template")
 	viper.SetDefault("app.log.level", "INFO")
-	viper.SetDefault("app.log.filelog.enable", "false")
-	viper.SetDefault("app.log.filelog.path", "./logs/")
+	viper.SetDefault("app.log.file.enable", "false")
+	viper.SetDefault("app.log.file.path", "./logs/")
 	viper.SetDefault("app.token,secret", "randomSecret")
 	viper.SetDefault("app.token.expire_duration", "1h")
 	viper.SetDefault("app.swagger.enable", true)
