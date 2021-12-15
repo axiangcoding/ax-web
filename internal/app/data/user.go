@@ -1,9 +1,9 @@
 package data
 
 import (
-	"axiangcoding/go-gin-template/internal/app/data/schema"
 	"context"
 	"errors"
+	"github.com/axiangcoding/go-gin-template/internal/app/data/schema"
 	"gorm.io/gorm"
 	"strconv"
 )
