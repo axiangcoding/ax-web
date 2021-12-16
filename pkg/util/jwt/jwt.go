@@ -38,7 +38,7 @@ func CreateToken(username string) (string, error) {
 		&jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(expireDuration).Unix(),
 			IssuedAt:  time.Now().Unix(),
-			Issuer:    "axiangcoding",
+			Issuer:    conf.Config.App.Name,
 		},
 		CustomerInfo{username, "human"},
 	}

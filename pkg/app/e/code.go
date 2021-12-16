@@ -12,3 +12,20 @@ const (
 	LoginFailed    = 12000
 	RegisterFailed = 12001
 )
+
+var errCodeText = map[int]string{
+	Success:               "OK",
+	Error:                 "System error",
+	RequestParamsNotValid: "Request params not valid",
+
+	TokenNotExist: "Token not exist",
+	TokenNotLegal: "Token is required",
+	TokenExpired:  "Token expired",
+
+	LoginFailed:    "Login failed",
+	RegisterFailed: "Register failed",
+}
+
+func CodeText(code int) string {
+	return errCodeText[code]
+}

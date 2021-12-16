@@ -15,8 +15,8 @@ func Logger() gin.HandlerFunc {
 
 		// Process request
 		c.Next()
+
 		end := time.Now()
-		// latency time
 		latencyTime := end.Sub(start)
 		reqMethod := c.Request.Method
 		statusCode := c.Writer.Status()

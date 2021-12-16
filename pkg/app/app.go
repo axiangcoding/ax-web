@@ -33,7 +33,7 @@ func generateErrJson(errors []error) ErrJson {
 func HttpResponse(c *gin.Context, httpCode int, msgCode int, data interface{}) {
 	c.JSON(httpCode, ApiJson{
 		Code: msgCode,
-		Msg:  e.GetMsg(msgCode),
+		Msg:  e.CodeText(msgCode),
 		Data: data,
 	})
 }
