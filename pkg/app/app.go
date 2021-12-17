@@ -18,7 +18,11 @@ type ErrJson struct {
 }
 
 // generateErrJson generate ErrJson from errors
-func generateErrJson(errors []error) ErrJson {
+func generateErrJson(errors []error) *ErrJson {
+	if len(errors) == 0 {
+		return nil
+	}
+
 	hideDetail := conf.Config.App.Response.HideErrorDetails
 	var errMessages []string
 	if !hideDetail {
@@ -26,7 +30,7 @@ func generateErrJson(errors []error) ErrJson {
 			errMessages = append(errMessages, err.Error())
 		}
 	}
-	return ErrJson{Err: errMessages}
+	return &ErrJson{Err: errMessages}
 }
 
 // HttpResponse common response

@@ -22,12 +22,12 @@ func PermissionCheck() gin.HandlerFunc {
 			if ve, ok := err.(*jwt.ValidationError); ok {
 				if ve.Errors&jwt.ValidationErrorMalformed != 0 {
 					// That's not even a token
-					app.Unauthorized(c, e.TokenNotLegal)
+					app.Unauthorized(c, e.TokenNotValid)
 				} else if ve.Errors&(jwt.ValidationErrorExpired|jwt.ValidationErrorNotValidYet) != 0 {
 					// token is either expired or not active yet
 					app.Unauthorized(c, e.TokenExpired)
 				} else {
-					app.Unauthorized(c, e.TokenNotLegal)
+					app.Unauthorized(c, e.TokenNotValid)
 				}
 			}
 			return

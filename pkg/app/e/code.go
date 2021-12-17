@@ -6,7 +6,7 @@ const (
 	RequestParamsNotValid = 10001
 
 	TokenNotExist = 11000
-	TokenNotLegal = 11001
+	TokenNotValid = 11001
 	TokenExpired  = 11002
 	NoPermission  = 11003
 
@@ -20,7 +20,7 @@ var errCodeText = map[int]string{
 	RequestParamsNotValid: "Request params not valid",
 
 	TokenNotExist: "Token not exist",
-	TokenNotLegal: "Token is required",
+	TokenNotValid: "Token not valid",
 	TokenExpired:  "Token expired",
 	NoPermission:  "No permission",
 
