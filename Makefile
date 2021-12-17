@@ -3,8 +3,9 @@
 all: swag run
 
 swag:
-	@echo "swag tool required"
-	swag init
+	@echo "latest swag tool required"
+	swag init --output ./api/docs
+	swag fmt
 
 clean:
 	go clean

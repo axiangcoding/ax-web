@@ -27,6 +27,7 @@ hide_error_details = false
 [server]
 run_mode = "debug"
 port = 8888
+base_path = "/api"
 
 
 

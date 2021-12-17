@@ -14,12 +14,12 @@ type LoginForm struct {
 }
 
 // UserLogin
-// @Summary User login
-// @Tags user
-// @Param form body LoginForm true "register form"
-// @Success 200 {object} app.ApiJson ""
-// @Failure 500 {object} app.ErrJson ""
-// @Router /api/v1/user/login [post]
+// @Summary  User login
+// @Tags     user
+// @Param    form  body      LoginForm    true  "register form"
+// @Success  200   {object}  app.ApiJson  ""
+// @Failure  500   {object}  app.ErrJson  ""
+// @Router   /v1/user/login [post]
 func UserLogin(c *gin.Context) {
 	form := LoginForm{}
 	err := c.ShouldBindJSON(&form)
@@ -49,12 +49,12 @@ type RegisterForm struct {
 }
 
 // UserRegister
-// @Summary User register
-// @Tags user
-// @Param form body RegisterForm true "register form"
-// @Success 200 {object} app.ApiJson ""
-// @Failure 500 {object} app.ErrJson ""
-// @Router /api/v1/user/register [post]
+// @Summary  User register
+// @Tags     user
+// @Param    form  body      RegisterForm  true  "register form"
+// @Success  200   {object}  app.ApiJson   ""
+// @Failure  500   {object}  app.ErrJson   ""
+// @Router   /v1/user/register [post]
 func UserRegister(c *gin.Context) {
 	regForm := RegisterForm{}
 	err := c.ShouldBindJSON(&regForm)

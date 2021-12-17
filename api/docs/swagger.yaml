@@ -1,3 +1,5 @@
+consumes:
+- application/json
 definitions:
   app.ApiJson:
     properties:
@@ -10,7 +12,9 @@ definitions:
   app.ErrJson:
     properties:
       err:
-        type: string
+        items:
+          type: string
+        type: array
     type: object
   v1.LoginForm:
     properties:
@@ -69,7 +73,7 @@ paths:
       summary: demo，测试get
       tags:
       - demo
-  /api/v1/demo/post:
+  /v1/demo/post:
     post:
       parameters:
       - description: some params json
@@ -89,7 +93,7 @@ paths:
       summary: demo，测试post
       tags:
       - demo
-  /api/v1/test/test-log:
+  /v1/test/test-log:
     get:
       produces:
       - application/json
@@ -103,7 +107,7 @@ paths:
       summary: demo，测试post
       tags:
       - demo
-  /api/v1/user/login:
+  /v1/user/login:
     post:
       parameters:
       - description: register form
@@ -124,7 +128,7 @@ paths:
       summary: User login
       tags:
       - user
-  /api/v1/user/register:
+  /v1/user/register:
     post:
       parameters:
       - description: register form
@@ -138,10 +142,6 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/app.ApiJson'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/app.ErrJson'
         "500":
           description: Internal Server Error
           schema:
@@ -149,6 +149,8 @@ paths:
       summary: User register
       tags:
       - user
+produces:
+- application/json
 securityDefinitions:
   ApiKeyAuth:
     in: header

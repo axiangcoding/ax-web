@@ -13,6 +13,12 @@ import (
 
 var doc = `{
     "schemes": {{ marshal .Schemes }},
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
     "swagger": "2.0",
     "info": {
         "description": "{{escape .Description}}",
@@ -65,7 +71,7 @@ var doc = `{
                 }
             }
         },
-        "/api/v1/demo/post": {
+        "/v1/demo/post": {
             "post": {
                 "security": [
                     {
@@ -99,7 +105,7 @@ var doc = `{
                 }
             }
         },
-        "/api/v1/test/test-log": {
+        "/v1/test/test-log": {
             "get": {
                 "security": [
                     {
@@ -123,7 +129,7 @@ var doc = `{
                 }
             }
         },
-        "/api/v1/user/login": {
+        "/v1/user/login": {
             "post": {
                 "tags": [
                     "user"
@@ -156,7 +162,7 @@ var doc = `{
                 }
             }
         },
-        "/api/v1/user/register": {
+        "/v1/user/register": {
             "post": {
                 "tags": [
                     "user"
@@ -178,12 +184,6 @@ var doc = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/app.ApiJson"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/app.ErrJson"
                         }
                     },
                     "500": {
@@ -213,7 +213,10 @@ var doc = `{
             "type": "object",
             "properties": {
                 "err": {
-                    "type": "string"
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 }
             }
         },
@@ -317,5 +320,5 @@ func (s *s) ReadDoc() string {
 }
 
 func init() {
-	swag.Register(swag.Name, &s{})
+	swag.Register("swagger", &s{})
 }

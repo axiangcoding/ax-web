@@ -24,24 +24,24 @@ func init() {
 	jwt_util.Setup()
 }
 
-// @title Golang Gin Template API
-// @version 1.0.0
-// @description An example of gin
+// @title        Golang Gin Template API
+// @version      1.0.0
+// @description  An example of gin
 // @termsOfService
 
-// @contact.name axiangcoding
+// @contact.name  axiangcoding
 // @contact.url
-// @contact.email axiangcoding@gmail.com
+// @contact.email  axiangcoding@gmail.com
 
 // @license.name
 // @license.url
 
-// @securityDefinitions.apikey ApiKeyAuth
-// @in header
-// @name token
+// @securityDefinitions.apikey  ApiKeyAuth
+// @in                          header
+// @name                        token
 
-// @accept json
-// @produce json
+// @accept   json
+// @produce  json
 func main() {
 	runMode := conf.Config.Server.RunMode
 	gin.SetMode(runMode)

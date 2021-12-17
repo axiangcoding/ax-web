@@ -1,8 +1,8 @@
 package router
 
 import (
+	"github.com/axiangcoding/go-gin-template/api/docs"
 	v1 "github.com/axiangcoding/go-gin-template/api/v1"
-	docs "github.com/axiangcoding/go-gin-template/docs"
 	"github.com/axiangcoding/go-gin-template/internal/app/conf"
 	"github.com/axiangcoding/go-gin-template/pkg/middleware"
 	"github.com/gin-gonic/gin"
@@ -47,4 +47,5 @@ func InitRouter() *gin.Engine {
 func setSwaggerInfo() {
 	docs.SwaggerInfo.Version = conf.Config.App.Version
 	docs.SwaggerInfo.Title = conf.Config.App.Name
+	docs.SwaggerInfo.BasePath = conf.Config.Server.BasePath
 }
