@@ -1,7 +1,8 @@
-package jwt
+package auth
 
 import (
 	"github.com/axiangcoding/go-gin-template/internal/app/conf"
+	"github.com/axiangcoding/go-gin-template/internal/app/data/schema"
 	"github.com/axiangcoding/go-gin-template/pkg/logging"
 	"time"
 
@@ -11,17 +12,17 @@ import (
 var jwtSecret []byte
 var expireDuration time.Duration
 
-type CustomerInfo struct {
-	UserID string `json:"user_id"`
-	Kind   string `json:"kind"`
+type UserInfo struct {
+	UserID int64  `json:"user_id"`
+	Roles  string `json:"roles"`
 }
 
 type CustomClaims struct {
 	*jwt.StandardClaims
-	CustomerInfo
+	UserInfo
 }
 
-func Setup() {
+func SetupJwt() {
 	jwtSecret = []byte(conf.Config.App.Token.Secret)
 	expireStr := conf.Config.App.Token.ExpireDuration
 	expire, err := time.ParseDuration(expireStr)
@@ -32,7 +33,7 @@ func Setup() {
 }
 
 // CreateToken generate tokens used for auth
-func CreateToken(username string) (string, error) {
+func CreateToken(user schema.User) (string, error) {
 	t := jwt.New(jwt.SigningMethodHS256)
 	t.Claims = &CustomClaims{
 		&jwt.StandardClaims{
@@ -40,7 +41,10 @@ func CreateToken(username string) (string, error) {
 			IssuedAt:  time.Now().Unix(),
 			Issuer:    conf.Config.App.Name,
 		},
-		CustomerInfo{username, "human"},
+		UserInfo{
+			UserID: user.UserId,
+			Roles:  user.Roles,
+		},
 	}
 	return t.SignedString(jwtSecret)
 }

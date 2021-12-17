@@ -33,7 +33,7 @@ var doc = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/api/v1/demo/get": {
+        "/v1/demo/get": {
             "get": {
                 "security": [
                     {
@@ -132,7 +132,7 @@ var doc = `{
         "/v1/user/login": {
             "post": {
                 "tags": [
-                    "user"
+                    "User"
                 ],
                 "summary": "User login",
                 "parameters": [
@@ -165,7 +165,7 @@ var doc = `{
         "/v1/user/register": {
             "post": {
                 "tags": [
-                    "user"
+                    "User"
                 ],
                 "summary": "User register",
                 "parameters": [

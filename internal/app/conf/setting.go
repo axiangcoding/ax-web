@@ -3,7 +3,6 @@ package conf
 import (
 	"log"
 
-	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
 )
 
@@ -30,14 +29,4 @@ func Setup() {
 func setDefault() {
 	// generate a default config file maybe?
 	// 是否要生成一个默认的配置文件？
-	viper.SetDefault("app.version", "0.0.1")
-	viper.SetDefault("app.name", "axiangcoding/go-gin-template")
-	viper.SetDefault("app.log.level", "INFO")
-	viper.SetDefault("app.log.file.enable", "false")
-	viper.SetDefault("app.log.file.path", "./logs/")
-	viper.SetDefault("app.token,secret", "randomSecret")
-	viper.SetDefault("app.token.expire_duration", "1h")
-	viper.SetDefault("app.swagger.enable", true)
-	viper.SetDefault("server.run_mode", gin.ReleaseMode)
-	viper.SetDefault("server.port", 8080)
 }

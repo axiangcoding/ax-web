@@ -45,38 +45,22 @@ func Success(c *gin.Context, data interface{}) {
 
 // BizFailed business failed response
 func BizFailed(c *gin.Context, errCode int, err ...error) {
-	if len(err) > 0 && err[0] != nil {
-		HttpResponse(c, http.StatusOK, errCode, generateErrJson(err))
-	} else {
-		HttpResponse(c, http.StatusOK, errCode, nil)
-	}
+	HttpResponse(c, http.StatusOK, errCode, generateErrJson(err))
 }
 
 // BadRequest bad request response
 func BadRequest(c *gin.Context, errCode int, err ...error) {
-	if len(err) > 0 && err[0] != nil {
-		HttpResponse(c, http.StatusBadRequest, errCode, generateErrJson(err))
-	} else {
-		HttpResponse(c, http.StatusBadRequest, errCode, nil)
-	}
+	HttpResponse(c, http.StatusBadRequest, errCode, generateErrJson(err))
 	c.Abort()
 }
 
 // ServerFailed server internal failed response
 func ServerFailed(c *gin.Context, errCode int, err ...error) {
-	if len(err) > 0 && err[0] != nil {
-		HttpResponse(c, http.StatusInternalServerError, errCode, generateErrJson(err))
-	} else {
-		HttpResponse(c, http.StatusInternalServerError, errCode, nil)
-	}
+	HttpResponse(c, http.StatusInternalServerError, errCode, generateErrJson(err))
 }
 
 //Unauthorized authorized failed response
 func Unauthorized(c *gin.Context, errCode int, err ...error) {
-	if len(err) > 0 && err[0] != nil {
-		HttpResponse(c, http.StatusUnauthorized, errCode, generateErrJson(err))
-	} else {
-		HttpResponse(c, http.StatusUnauthorized, errCode, nil)
-	}
+	HttpResponse(c, http.StatusUnauthorized, errCode, generateErrJson(err))
 	c.Abort()
 }

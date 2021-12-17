@@ -15,7 +15,7 @@ type LoginForm struct {
 
 // UserLogin
 // @Summary  User login
-// @Tags     user
+// @Tags     User
 // @Param    form  body      LoginForm    true  "register form"
 // @Success  200   {object}  app.ApiJson  ""
 // @Failure  500   {object}  app.ErrJson  ""
@@ -50,7 +50,7 @@ type RegisterForm struct {
 
 // UserRegister
 // @Summary  User register
-// @Tags     user
+// @Tags     User
 // @Param    form  body      RegisterForm  true  "register form"
 // @Success  200   {object}  app.ApiJson   ""
 // @Failure  500   {object}  app.ErrJson   ""

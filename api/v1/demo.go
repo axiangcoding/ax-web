@@ -6,13 +6,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// DemoGet
 // @Summary   demo，测试get
 // @Produce   json
 // @Tags      demo
 // @Param     param1  query     string  false  "some params named param1"
 // @Param     param2  query     string  false  "some params named param2"
 // @Success   200     {string}  json    ""
-// @Router    /api/v1/demo/get [get]
+// @Router    /v1/demo/get [get]
 // @Security  ApiKeyAuth
 func DemoGet(c *gin.Context) {
 	param1 := c.Query("param1")
@@ -39,7 +40,7 @@ type Params struct {
 // @Security  ApiKeyAuth
 func DemoPost(c *gin.Context) {
 	params := Params{}
-	c.BindJSON(&params)
+	c.ShouldBindJSON(&params)
 	c.JSON(200, gin.H{
 		"method":    "post",
 		"post_body": params,

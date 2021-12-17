@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"github.com/axiangcoding/go-gin-template/internal/app/conf"
 	"github.com/axiangcoding/go-gin-template/internal/app/data"
+	"github.com/axiangcoding/go-gin-template/pkg/auth"
 	"github.com/axiangcoding/go-gin-template/pkg/logging"
 	"github.com/axiangcoding/go-gin-template/pkg/router"
-	jwt_util "github.com/axiangcoding/go-gin-template/pkg/util/jwt"
 	"net/http"
 	"os"
 	"os/signal"
@@ -21,7 +21,7 @@ func init() {
 	conf.Setup()
 	logging.Setup()
 	data.Setup()
-	jwt_util.Setup()
+	auth.Setup()
 }
 
 // @title        Golang Gin Template API

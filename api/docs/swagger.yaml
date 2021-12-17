@@ -50,7 +50,7 @@ info:
   title: Golang Gin Template API
   version: 1.0.0
 paths:
-  /api/v1/demo/get:
+  /v1/demo/get:
     get:
       parameters:
       - description: some params named param1
@@ -127,7 +127,7 @@ paths:
             $ref: '#/definitions/app.ErrJson'
       summary: User login
       tags:
-      - user
+      - User
   /v1/user/register:
     post:
       parameters:
@@ -148,7 +148,7 @@ paths:
             $ref: '#/definitions/app.ErrJson'
       summary: User register
       tags:
-      - user
+      - User
 produces:
 - application/json
 securityDefinitions:

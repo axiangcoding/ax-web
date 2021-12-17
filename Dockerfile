@@ -8,6 +8,6 @@ FROM scratch as prod
 COPY --from=build /build/application /app/application
 # copy config file
 COPY --from=build /build/config /app/config
-EXPOSE 8080
+EXPOSE 8888
 WORKDIR /app
 CMD ["/app/application"]

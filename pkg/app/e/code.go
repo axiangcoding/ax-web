@@ -8,6 +8,7 @@ const (
 	TokenNotExist = 11000
 	TokenNotLegal = 11001
 	TokenExpired  = 11002
+	NoPermission  = 11003
 
 	LoginFailed    = 12000
 	RegisterFailed = 12001
@@ -21,6 +22,7 @@ var errCodeText = map[int]string{
 	TokenNotExist: "Token not exist",
 	TokenNotLegal: "Token is required",
 	TokenExpired:  "Token expired",
+	NoPermission:  "No permission",
 
 	LoginFailed:    "Login failed",
 	RegisterFailed: "Register failed",

@@ -17,7 +17,7 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/api/v1/demo/get": {
+        "/v1/demo/get": {
             "get": {
                 "security": [
                     {
@@ -116,7 +116,7 @@
         "/v1/user/login": {
             "post": {
                 "tags": [
-                    "user"
+                    "User"
                 ],
                 "summary": "User login",
                 "parameters": [
@@ -149,7 +149,7 @@
         "/v1/user/register": {
             "post": {
                 "tags": [
-                    "user"
+                    "User"
                 ],
                 "summary": "User register",
                 "parameters": [

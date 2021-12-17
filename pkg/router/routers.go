@@ -20,7 +20,7 @@ func InitRouter() *gin.Engine {
 	r.Use(gin.Recovery())
 	groupV1 := r.Group("/api/v1")
 	{
-		demo := groupV1.Group("/demo", middleware.Token())
+		demo := groupV1.Group("/demo", middleware.PermissionCheck())
 		{
 			demo.GET("/get", v1.DemoGet)
 			demo.POST("/post", v1.DemoPost)

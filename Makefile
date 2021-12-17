@@ -16,7 +16,7 @@ check:
 
 build-image:
 	@echo "docker required"
-	docker build . -t axiangcoding/gin-template:latest
+	docker build . -t axiangcoding/go-gin-template:latest
 
 run:
 	go run ./
