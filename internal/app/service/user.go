@@ -4,10 +4,9 @@ import (
 	"github.com/axiangcoding/go-gin-template/internal/app/data"
 	"github.com/axiangcoding/go-gin-template/internal/app/data/schema"
 	"github.com/axiangcoding/go-gin-template/internal/app/entity"
-	jwt_util "github.com/axiangcoding/go-gin-template/pkg/util/jwt"
+	jwt_util "github.com/axiangcoding/go-gin-template/pkg/auth"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
-	"strconv"
 )
 
 func UserRegister(ctx *gin.Context, ur entity.UserRegister) (string, error) {
@@ -37,7 +36,7 @@ func UserLogin(ctx *gin.Context, login entity.UserLogin) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	token, err := jwt_util.CreateToken(strconv.FormatInt(findUser.UserId, 10))
+	token, err := jwt_util.CreateToken(findUser)
 	if err != nil {
 		return "", err
 	}

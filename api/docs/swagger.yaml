@@ -1,3 +1,5 @@
+consumes:
+- application/json
 definitions:
   app.ApiJson:
     properties:
@@ -10,7 +12,9 @@ definitions:
   app.ErrJson:
     properties:
       err:
-        type: string
+        items:
+          type: string
+        type: array
     type: object
   v1.LoginForm:
     properties:
@@ -46,7 +50,7 @@ info:
   title: Golang Gin Template API
   version: 1.0.0
 paths:
-  /api/v1/demo/get:
+  /v1/demo/get:
     get:
       parameters:
       - description: some params named param1
@@ -69,7 +73,7 @@ paths:
       summary: demo，测试get
       tags:
       - demo
-  /api/v1/demo/post:
+  /v1/demo/post:
     post:
       parameters:
       - description: some params json
@@ -89,7 +93,7 @@ paths:
       summary: demo，测试post
       tags:
       - demo
-  /api/v1/test/test-log:
+  /v1/test/test-log:
     get:
       produces:
       - application/json
@@ -103,7 +107,7 @@ paths:
       summary: demo，测试post
       tags:
       - demo
-  /api/v1/user/login:
+  /v1/user/login:
     post:
       parameters:
       - description: register form
@@ -123,8 +127,8 @@ paths:
             $ref: '#/definitions/app.ErrJson'
       summary: User login
       tags:
-      - user
-  /api/v1/user/register:
+      - User
+  /v1/user/register:
     post:
       parameters:
       - description: register form
@@ -144,7 +148,9 @@ paths:
             $ref: '#/definitions/app.ErrJson'
       summary: User register
       tags:
-      - user
+      - User
+produces:
+- application/json
 securityDefinitions:
   ApiKeyAuth:
     in: header

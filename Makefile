@@ -3,8 +3,9 @@
 all: swag run
 
 swag:
-	@echo "swag tool required"
-	swag init
+	@echo "latest swag tool required"
+	swag init --output ./api/docs
+	swag fmt
 
 clean:
 	go clean
@@ -15,7 +16,7 @@ check:
 
 build-image:
 	@echo "docker required"
-	docker build . -t axiangcoding/gin-template:latest
+	docker build . -t axiangcoding/go-gin-template:latest
 
 run:
 	go run ./

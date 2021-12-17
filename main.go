@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"github.com/axiangcoding/go-gin-template/internal/app/conf"
 	"github.com/axiangcoding/go-gin-template/internal/app/data"
+	"github.com/axiangcoding/go-gin-template/pkg/auth"
 	"github.com/axiangcoding/go-gin-template/pkg/logging"
 	"github.com/axiangcoding/go-gin-template/pkg/router"
-	jwt_util "github.com/axiangcoding/go-gin-template/pkg/util/jwt"
 	"net/http"
 	"os"
 	"os/signal"
@@ -21,27 +21,27 @@ func init() {
 	conf.Setup()
 	logging.Setup()
 	data.Setup()
-	jwt_util.Setup()
+	auth.Setup()
 }
 
-// @title Golang Gin Template API
-// @version 1.0.0
-// @description An example of gin
+// @title        Golang Gin Template API
+// @version      1.0.0
+// @description  An example of gin
 // @termsOfService
 
-// @contact.name axiangcoding
+// @contact.name  axiangcoding
 // @contact.url
-// @contact.email axiangcoding@gmail.com
+// @contact.email  axiangcoding@gmail.com
 
 // @license.name
 // @license.url
 
-// @securityDefinitions.apikey ApiKeyAuth
-// @in header
-// @name token
+// @securityDefinitions.apikey  ApiKeyAuth
+// @in                          header
+// @name                        token
 
-// @accept json
-// @produce json
+// @accept   json
+// @produce  json
 func main() {
 	runMode := conf.Config.Server.RunMode
 	gin.SetMode(runMode)
@@ -54,11 +54,9 @@ func main() {
 	// 在 goroutine中初始化服务器，这样就不会阻塞下文的优雅停止处理
 	go func() {
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-			logging.Fatal("Listen: %s\n", err)
+			logging.Fatal("Server error. ", err)
 		}
 	}()
-
-	logging.Infof("Server start at port: %s", conf.Config.Server.Port)
 
 	// 等待中断信号来优雅停止服务器，设置的5秒延迟
 	quit := make(chan os.Signal, 1)
@@ -73,7 +71,7 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 	if err := srv.Shutdown(ctx); err != nil {
-		logging.Fatal("Server forced to shutdown: ", err)
+		logging.Fatal("Server forced to shutdown. ", err)
 	}
 
 	logging.Info("Server exiting")

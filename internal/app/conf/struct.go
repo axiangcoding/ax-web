@@ -31,7 +31,8 @@ type AllConfig struct {
 		}
 	}
 	Server struct {
-		RunMode string `mapstructure:"run_mode"`
-		Port    string
+		RunMode  string `mapstructure:"run_mode"`
+		Port     string
+		BasePath string `mapstructure:"base_path"`
 	}
 }

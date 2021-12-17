@@ -1,4 +1,4 @@
-# Go Gin Template [![Go Report Card](https://goreportcard.com/badge/github.com/axiangcoding/go-gin-template)](https://goreportcard.com/report/github.com/axiangcoding/go-gin-template)  [![MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
+# Go Gin Template [![Go Report Card](https://goreportcard.com/badge/github.com/axiangcoding/go-gin-template)](https://goreportcard.com/report/github.com/axiangcoding/go-gin-template)  [![MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE) [![codebeat badge](https://codebeat.co/badges/25562f5b-a6ee-4ec8-a93d-97b55cec9a22)](https://codebeat.co/projects/github-com-axiangcoding-go-gin-template-master)
 
 Switch language: [中文](./README_ZH.md)|English
 

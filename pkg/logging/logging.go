@@ -2,12 +2,8 @@ package logging
 
 import (
 	"github.com/axiangcoding/go-gin-template/internal/app/conf"
-	"github.com/axiangcoding/go-gin-template/pkg/util/file"
-	"io"
-	"os"
 	"path"
 
-	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"gopkg.in/natefinch/lumberjack.v2"
@@ -22,14 +18,8 @@ func Setup() {
 	enableFileLog = conf.Config.App.Log.File.Enable
 	logger, _ := zap.NewDevelopment()
 	logConsole = logger.Sugar()
-
 	// 是否打印日志到文件中
 	if enableFileLog {
-		// 设置gin server的日志输出
-		serverFile := CreateLogFile("server.log")
-		gin.DisableConsoleColor()
-		gin.DefaultWriter = io.MultiWriter(os.Stdout, serverFile)
-
 		// 设置application的日志输出
 		zapLevel := zapcore.InfoLevel
 		level := conf.Config.App.Log.Level
@@ -64,98 +54,86 @@ func Setup() {
 
 }
 
-func CreateLogFile(fileName string) *os.File {
-	logPath := conf.Config.App.Log.File.Path
-	if err := file.MkdirIfNotExist(logPath); err != nil {
-		Error(err)
-	}
-	f, err := os.Create(path.Join(logPath, fileName))
-	if err != nil {
-		Error(err)
-	}
-	return f
-}
-
 func Debug(args ...interface{}) {
-	logConsole.Debug(args)
+	logConsole.Debug(args...)
 	if enableFileLog {
-		logFile.Debug(args)
+		logFile.Debug(args...)
 	}
 }
 
 func Debugf(template string, args ...interface{}) {
-	logConsole.Debugf(template, args)
+	logConsole.Debugf(template, args...)
 	if enableFileLog {
-		logFile.Debugf(template, args)
+		logFile.Debugf(template, args...)
 	}
 }
 
 func Info(args ...interface{}) {
-	logConsole.Info(args)
+	logConsole.Info(args...)
 	if enableFileLog {
-		logFile.Info(args)
+		logFile.Info(args...)
 	}
 }
 
 func Infof(template string, args ...interface{}) {
-	logConsole.Infof(template, args)
+	logConsole.Infof(template, args...)
 	if enableFileLog {
-		logFile.Infof(template, args)
+		logFile.Infof(template, args...)
 	}
 }
 
 func Warn(args ...interface{}) {
-	logConsole.Warn(args)
+	logConsole.Warn(args...)
 	if enableFileLog {
-		logFile.Warn(args)
+		logFile.Warn(args...)
 	}
 }
 
 func Warnf(template string, args ...interface{}) {
-	logConsole.Warnf(template, args)
+	logConsole.Warnf(template, args...)
 	if enableFileLog {
-		logFile.Warnf(template, args)
+		logFile.Warnf(template, args...)
 	}
 }
 
 func Error(args ...interface{}) {
-	logConsole.Error(args)
+	logConsole.Error(args...)
 	if enableFileLog {
-		logFile.Error(args)
+		logFile.Error(args...)
 	}
 }
 
 func Errorf(template string, args ...interface{}) {
-	logConsole.Errorf(template, args)
+	logConsole.Errorf(template, args...)
 	if enableFileLog {
-		logFile.Errorf(template, args)
+		logFile.Errorf(template, args...)
 	}
 }
 
 func Fatal(args ...interface{}) {
-	logConsole.Fatal(args)
+	logConsole.Fatal(args...)
 	if enableFileLog {
-		logFile.Fatal(args)
+		logFile.Fatal(args...)
 	}
 }
 
 func Fatalf(template string, args ...interface{}) {
-	logConsole.Fatalf(template, args)
+	logConsole.Fatalf(template, args...)
 	if enableFileLog {
-		logFile.Fatalf(template, args)
+		logFile.Fatalf(template, args...)
 	}
 }
 
 func Panic(args ...interface{}) {
-	logConsole.Panic(args)
+	logConsole.Panic(args...)
 	if enableFileLog {
-		logFile.Panic(args)
+		logFile.Panic(args...)
 	}
 }
 
 func Panicf(template string, args ...interface{}) {
-	logConsole.Panicf(template, args)
+	logConsole.Panicf(template, args...)
 	if enableFileLog {
-		logFile.Panicf(template, args)
+		logFile.Panicf(template, args...)
 	}
 }

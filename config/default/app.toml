@@ -1,5 +1,5 @@
 [app]
-version = "0.0.1"
+version = "1.0.0"
 name = "axiangcoding/go-gin-template"
 
 [app.log]
@@ -26,7 +26,8 @@ hide_error_details = false
 
 [server]
 run_mode = "debug"
-port = 8080
+port = 8888
+base_path = "/api"
 
 
 

@@ -14,17 +14,17 @@ type LoginForm struct {
 }
 
 // UserLogin
-// @Summary User login
-// @Tags user
-// @Param form body LoginForm true "register form"
-// @Success 200 {object} app.ApiJson ""
-// @Failure 500 {object} app.ErrJson ""
-// @Router /api/v1/user/login [post]
+// @Summary  User login
+// @Tags     User
+// @Param    form  body      LoginForm    true  "register form"
+// @Success  200   {object}  app.ApiJson  ""
+// @Failure  500   {object}  app.ErrJson  ""
+// @Router   /v1/user/login [post]
 func UserLogin(c *gin.Context) {
 	form := LoginForm{}
-	err := c.BindJSON(&form)
+	err := c.ShouldBindJSON(&form)
 	if err != nil {
-		app.BizFailed(c, e.RequestParamsNotValid, err)
+		app.BadRequest(c, e.RequestParamsNotValid, err)
 		return
 	}
 
@@ -42,24 +42,24 @@ func UserLogin(c *gin.Context) {
 }
 
 type RegisterForm struct {
-	UserName string
-	Email    *string
-	Phone    *string
+	UserName string  `binding:"alphanum"`
+	Email    *string `binding:"email"`
+	Phone    *string `binding:"e164"`
 	Password string
 }
 
 // UserRegister
-// @Summary User register
-// @Tags user
-// @Param form body RegisterForm true "register form"
-// @Success 200 {object} app.ApiJson ""
-// @Failure 500 {object} app.ErrJson ""
-// @Router /api/v1/user/register [post]
+// @Summary  User register
+// @Tags     User
+// @Param    form  body      RegisterForm  true  "register form"
+// @Success  200   {object}  app.ApiJson   ""
+// @Failure  500   {object}  app.ErrJson   ""
+// @Router   /v1/user/register [post]
 func UserRegister(c *gin.Context) {
 	regForm := RegisterForm{}
-	err := c.BindJSON(&regForm)
+	err := c.ShouldBindJSON(&regForm)
 	if err != nil {
-		app.BizFailed(c, e.RequestParamsNotValid, err)
+		app.BadRequest(c, e.RequestParamsNotValid, err)
 		return
 	}
 	register := entity.UserRegister{

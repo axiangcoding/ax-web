@@ -1,8 +1,8 @@
 package router
 
 import (
+	"github.com/axiangcoding/go-gin-template/api/docs"
 	v1 "github.com/axiangcoding/go-gin-template/api/v1"
-	docs "github.com/axiangcoding/go-gin-template/docs"
 	"github.com/axiangcoding/go-gin-template/internal/app/conf"
 	"github.com/axiangcoding/go-gin-template/pkg/middleware"
 	"github.com/gin-gonic/gin"
@@ -13,15 +13,14 @@ import (
 func InitRouter() *gin.Engine {
 	r := gin.New()
 	// 全局中间件
-	// Logger 中间件将日志写入 gin.DefaultWriter，即使你将 GIN_MODE 设置为 release。
-	// By default gin.DefaultWriter = os.Stdout
-	r.Use(gin.Logger())
+	// 使用自定义中间件
+	r.Use(middleware.Logger())
 
 	// Recovery 中间件会 recover 任何 panic。如果有 panic 的话，会写入 500。
 	r.Use(gin.Recovery())
 	groupV1 := r.Group("/api/v1")
 	{
-		demo := groupV1.Group("/demo", middleware.Token())
+		demo := groupV1.Group("/demo", middleware.PermissionCheck())
 		{
 			demo.GET("/get", v1.DemoGet)
 			demo.POST("/post", v1.DemoPost)
@@ -48,4 +47,5 @@ func InitRouter() *gin.Engine {
 func setSwaggerInfo() {
 	docs.SwaggerInfo.Version = conf.Config.App.Version
 	docs.SwaggerInfo.Title = conf.Config.App.Name
+	docs.SwaggerInfo.BasePath = conf.Config.Server.BasePath
 }
