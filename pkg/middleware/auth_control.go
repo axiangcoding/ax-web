@@ -35,7 +35,6 @@ func PermissionCheck() gin.HandlerFunc {
 		roles := claims.UserInfo.Roles
 
 		roleItems := strings.Split(roles, ",")
-		println(len(roleItems))
 		if len(roleItems) == 0 {
 			app.Unauthorized(c, e.NoPermission)
 			return
