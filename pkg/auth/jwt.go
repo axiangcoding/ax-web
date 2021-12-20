@@ -4,6 +4,7 @@ import (
 	"github.com/axiangcoding/go-gin-template/internal/app/conf"
 	"github.com/axiangcoding/go-gin-template/internal/app/data/schema"
 	"github.com/axiangcoding/go-gin-template/pkg/logging"
+	"github.com/google/uuid"
 	"time"
 
 	"github.com/golang-jwt/jwt"
@@ -35,10 +36,13 @@ func SetupJwt() {
 // CreateToken generate tokens used for auth
 func CreateToken(user schema.User) (string, error) {
 	t := jwt.New(jwt.SigningMethodHS256)
+	now := time.Now()
 	t.Claims = &CustomClaims{
 		&jwt.StandardClaims{
-			ExpiresAt: time.Now().Add(expireDuration).Unix(),
-			IssuedAt:  time.Now().Unix(),
+			Id:        uuid.NewString(),
+			ExpiresAt: now.Add(expireDuration).Unix(),
+			IssuedAt:  now.Unix(),
+			NotBefore: now.Unix(),
 			Issuer:    conf.Config.App.Name,
 		},
 		UserInfo{

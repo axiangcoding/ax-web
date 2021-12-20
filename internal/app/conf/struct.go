@@ -12,8 +12,9 @@ type AllConfig struct {
 			}
 		}
 		Token struct {
-			Secret         string
-			ExpireDuration string `mapstructure:"expire_duration"`
+			Secret          string
+			ExpireDuration  string `mapstructure:"expire_duration"`
+			RefreshDuration string `mapstructure:"refresh_duration"`
 		}
 		Swagger struct {
 			Enable bool
@@ -24,6 +25,10 @@ type AllConfig struct {
 				Source      string
 				MaxIdleConn int `mapstructure:"max_idle_conn"`
 				MaxOpenConn int `mapstructure:"max_open_conn"`
+			}
+			Cache struct {
+				Driver string
+				Source string
 			}
 		}
 		Response struct {

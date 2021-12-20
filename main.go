@@ -6,6 +6,7 @@ import (
 	"github.com/axiangcoding/go-gin-template/internal/app/conf"
 	"github.com/axiangcoding/go-gin-template/internal/app/data"
 	"github.com/axiangcoding/go-gin-template/pkg/auth"
+	"github.com/axiangcoding/go-gin-template/pkg/cache"
 	"github.com/axiangcoding/go-gin-template/pkg/logging"
 	"github.com/axiangcoding/go-gin-template/pkg/router"
 	"net/http"
@@ -21,6 +22,7 @@ func init() {
 	conf.Setup()
 	logging.Setup()
 	data.Setup()
+	cache.Setup()
 	auth.Setup()
 }
 

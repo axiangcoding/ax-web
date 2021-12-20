@@ -15,10 +15,10 @@ type LoginForm struct {
 
 // UserLogin
 // @Summary  User login
-// @Tags     User
+// @Tags      User
 // @Param    form  body      LoginForm    true  "register form"
-// @Success  200   {object}  app.ApiJson  ""
-// @Failure  500   {object}  app.ErrJson  ""
+// @Success   200  {object}  app.ApiJson  ""
+// @Failure   400  {object}  app.ErrJson  ""
 // @Router   /v1/user/login [post]
 func UserLogin(c *gin.Context) {
 	form := LoginForm{}
@@ -52,8 +52,8 @@ type RegisterForm struct {
 // @Summary  User register
 // @Tags     User
 // @Param    form  body      RegisterForm  true  "register form"
-// @Success  200   {object}  app.ApiJson   ""
-// @Failure  500   {object}  app.ErrJson   ""
+// @Success  200   {object}  app.ApiJson  ""
+// @Failure  400   {object}  app.ErrJson   ""
 // @Router   /v1/user/register [post]
 func UserRegister(c *gin.Context) {
 	regForm := RegisterForm{}
@@ -74,4 +74,20 @@ func UserRegister(c *gin.Context) {
 		return
 	}
 	app.Success(c, map[string]string{"id": id})
+}
+
+// UserLogout
+// @Summary   User logout
+// @Tags     User
+// @Success  200   {object}  app.ApiJson   ""
+// @Failure  400   {object}  app.ErrJson  ""
+// @Router    /v1/user/logout [post]
+// @Security  ApiKeyAuth
+func UserLogout(c *gin.Context) {
+	err := service.UserLogout(c, c.GetHeader("token"))
+	if err != nil {
+		app.BizFailed(c, e.Error, err)
+		return
+	}
+	app.Success(c, nil)
 }

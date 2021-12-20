@@ -72,7 +72,7 @@ paths:
       - ApiKeyAuth: []
       summary: demo，测试get
       tags:
-      - demo
+      - Demo/Test
   /v1/demo/post:
     post:
       parameters:
@@ -93,6 +93,18 @@ paths:
       summary: demo，测试post
       tags:
       - demo
+  /v1/system/info:
+    get:
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.ApiJson'
+      security:
+      - ApiKeyAuth: []
+      summary: System Info
+      tags:
+      - System
   /v1/test/test-log:
     get:
       produces:
@@ -121,11 +133,27 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/app.ApiJson'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           schema:
             $ref: '#/definitions/app.ErrJson'
       summary: User login
+      tags:
+      - User
+  /v1/user/logout:
+    post:
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.ApiJson'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/app.ErrJson'
+      security:
+      - ApiKeyAuth: []
+      summary: User logout
       tags:
       - User
   /v1/user/register:
@@ -142,8 +170,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/app.ApiJson'
-        "500":
-          description: Internal Server Error
+        "400":
+          description: Bad Request
           schema:
             $ref: '#/definitions/app.ErrJson'
       summary: User register

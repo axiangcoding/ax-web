@@ -44,7 +44,7 @@ var doc = `{
                     "application/json"
                 ],
                 "tags": [
-                    "demo"
+                    "Demo/Test"
                 ],
                 "summary": "demo，测试get",
                 "parameters": [
@@ -105,6 +105,27 @@ var doc = `{
                 }
             }
         },
+        "/v1/system/info": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "tags": [
+                    "System"
+                ],
+                "summary": "System Info",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/app.ApiJson"
+                        }
+                    }
+                }
+            }
+        },
         "/v1/test/test-log": {
             "get": {
                 "security": [
@@ -153,8 +174,35 @@ var doc = `{
                             "$ref": "#/definitions/app.ApiJson"
                         }
                     },
-                    "500": {
-                        "description": "Internal Server Error",
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/app.ErrJson"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/user/logout": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "User logout",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/app.ApiJson"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
                         "schema": {
                             "$ref": "#/definitions/app.ErrJson"
                         }
@@ -186,8 +234,8 @@ var doc = `{
                             "$ref": "#/definitions/app.ApiJson"
                         }
                     },
-                    "500": {
-                        "description": "Internal Server Error",
+                    "400": {
+                        "description": "Bad Request",
                         "schema": {
                             "$ref": "#/definitions/app.ErrJson"
                         }
