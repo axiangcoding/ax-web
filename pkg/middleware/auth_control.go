@@ -1,16 +1,17 @@
 package middleware
 
 import (
+	"github.com/axiangcoding/go-gin-template/internal/app/service"
 	"github.com/axiangcoding/go-gin-template/pkg/app"
 	"github.com/axiangcoding/go-gin-template/pkg/app/e"
 	"github.com/axiangcoding/go-gin-template/pkg/auth"
-	"github.com/axiangcoding/go-gin-template/pkg/logging"
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt"
+	"strconv"
 	"strings"
 )
 
-func PermissionCheck() gin.HandlerFunc {
+func AuthCheck() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		tokenString := c.GetHeader("token")
 		if tokenString == "" {
@@ -32,8 +33,21 @@ func PermissionCheck() gin.HandlerFunc {
 			}
 			return
 		}
+		// check token in cache
+		userID := claims.UserInfo.UserID
+		cacheToken, err := service.GetCachedToken(c, strconv.FormatInt(userID, 10))
+		if err != nil {
+			app.Unauthorized(c, e.TokenExpired, err)
+			return
+		}
+		if tokenString == cacheToken {
+			service.RefreshTokenTTL(c, strconv.FormatInt(userID, 10))
+		} else {
+			app.Unauthorized(c, e.TokenExpired)
+			return
+		}
+		// check user permission to access resource
 		roles := claims.UserInfo.Roles
-
 		roleItems := strings.Split(roles, ",")
 		if len(roleItems) == 0 {
 			app.Unauthorized(c, e.NoPermission)
@@ -51,7 +65,6 @@ func PermissionCheck() gin.HandlerFunc {
 				break
 			}
 		}
-		logging.Info(hasPermission)
 		if !hasPermission {
 			app.Unauthorized(c, e.NoPermission)
 			return

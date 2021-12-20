@@ -4,9 +4,10 @@ import (
 	"github.com/axiangcoding/go-gin-template/internal/app/data"
 	"github.com/axiangcoding/go-gin-template/internal/app/data/schema"
 	"github.com/axiangcoding/go-gin-template/internal/app/entity"
-	jwt_util "github.com/axiangcoding/go-gin-template/pkg/auth"
+	"github.com/axiangcoding/go-gin-template/pkg/auth"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
+	"strconv"
 )
 
 func UserRegister(ctx *gin.Context, ur entity.UserRegister) (string, error) {
@@ -19,6 +20,7 @@ func UserRegister(ctx *gin.Context, ur entity.UserRegister) (string, error) {
 		Email:    ur.Email,
 		Phone:    ur.Phone,
 		Password: string(hashedPassword),
+		Roles:    schema.UserRoleNormal,
 	}
 	user.GenerateId()
 	return data.UserRegister(ctx, user)
@@ -36,9 +38,23 @@ func UserLogin(ctx *gin.Context, login entity.UserLogin) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	token, err := jwt_util.CreateToken(findUser)
+	token, err := auth.CreateToken(findUser)
+	if err != nil {
+		return "", err
+	}
+	// FIXME: should use userID as key, so we can kick out expired token
+	err = CacheToken(ctx, strconv.FormatInt(findUser.UserId, 10), token)
 	if err != nil {
 		return "", err
 	}
 	return token, nil
+}
+
+func UserLogout(c *gin.Context, token string) error {
+	claims, _ := auth.ParseToken(token)
+	err := DeleteCachedToken(c, claims.Id)
+	if err != nil {
+		return err
+	}
+	return nil
 }

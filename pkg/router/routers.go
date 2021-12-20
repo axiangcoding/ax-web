@@ -20,7 +20,7 @@ func InitRouter() *gin.Engine {
 	r.Use(gin.Recovery())
 	groupV1 := r.Group("/api/v1")
 	{
-		demo := groupV1.Group("/demo", middleware.PermissionCheck())
+		demo := groupV1.Group("/demo", middleware.AuthCheck())
 		{
 			demo.GET("/get", v1.DemoGet)
 			demo.POST("/post", v1.DemoPost)
@@ -33,6 +33,11 @@ func InitRouter() *gin.Engine {
 		{
 			user.POST("/login", v1.UserLogin)
 			user.POST("/register", v1.UserRegister)
+			user.POST("/logout", middleware.AuthCheck(), v1.UserLogout)
+		}
+		system := groupV1.Group("/system", middleware.AuthCheck())
+		{
+			system.GET("/info", v1.SystemInfo)
 		}
 
 	}

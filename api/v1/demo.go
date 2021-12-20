@@ -9,7 +9,7 @@ import (
 // DemoGet
 // @Summary   demo，测试get
 // @Produce   json
-// @Tags      demo
+// @Tags      Demo/Test
 // @Param     param1  query     string  false  "some params named param1"
 // @Param     param2  query     string  false  "some params named param2"
 // @Success   200     {string}  json    ""

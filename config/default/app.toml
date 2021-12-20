@@ -8,8 +8,9 @@ file.enable = false
 file.path = "./logs/"
 
 [app.token]
-secret = "randomSecret"
-expire_duration = "1h"
+secret = "r@ndomSecretForSign"
+expire_duration = "12h"
+refresh_duration = "10m"
 
 [app.swagger]
 enable = true
@@ -19,6 +20,11 @@ driver = "mysql"
 source = "axiangcoding:axiangP@ssword@tcp(127.0.0.1:3306)/some_db?charset=utf8mb4&parseTime=true"
 max_open_conn = 100
 max_idle_conn = 10
+
+[app.data.cache]
+# only support cache for now
+driver = "redis"
+source = "redis://localhost:6379/0"
 
 [app.response]
 # hide error details

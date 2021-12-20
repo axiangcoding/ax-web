@@ -6,6 +6,12 @@ import (
 	"gorm.io/gorm"
 )
 
+const (
+	UserRoleAdmin   = "admin"
+	UserRoleManager = "manager"
+	UserRoleNormal  = "normal"
+)
+
 type User struct {
 	gorm.Model
 	UserId int64 `gorm:"uniqueIndex"`
