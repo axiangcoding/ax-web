@@ -84,9 +84,13 @@ func UserRegister(c *gin.Context) {
 // @Router    /v1/user/logout [post]
 // @Security  ApiKeyAuth
 func UserLogout(c *gin.Context) {
-	err := service.UserLogout(c, c.GetHeader("token"))
+	result, err := service.UserLogout(c, c.GetHeader("token"))
 	if err != nil {
 		app.BizFailed(c, e.Error, err)
+		return
+	}
+	if result == 0 {
+		app.BizFailed(c, e.TokenNotValid)
 		return
 	}
 	app.Success(c, nil)

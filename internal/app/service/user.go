@@ -42,7 +42,6 @@ func UserLogin(ctx *gin.Context, login entity.UserLogin) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	// FIXME: should use userID as key, so we can kick out expired token
 	err = CacheToken(ctx, strconv.FormatInt(findUser.UserId, 10), token)
 	if err != nil {
 		return "", err
@@ -50,11 +49,12 @@ func UserLogin(ctx *gin.Context, login entity.UserLogin) (string, error) {
 	return token, nil
 }
 
-func UserLogout(c *gin.Context, token string) error {
+func UserLogout(c *gin.Context, token string) (int64, error) {
+
 	claims, _ := auth.ParseToken(token)
-	err := DeleteCachedToken(c, claims.Id)
+	result, err := DeleteCachedToken(c, claims.Id)
 	if err != nil {
-		return err
+		return 0, err
 	}
-	return nil
+	return result, nil
 }

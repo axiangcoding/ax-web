@@ -54,7 +54,7 @@ func GetCachedToken(ctx *gin.Context, key string) (string, error) {
 	return result, nil
 }
 
-func DeleteCachedToken(ctx *gin.Context, key string) error {
-	err := cache.GetRedis().Del(ctx, tokenKeyPrefix+key).Err()
-	return err
+func DeleteCachedToken(ctx *gin.Context, key string) (int64, error) {
+	result, err := cache.GetRedis().Del(ctx, tokenKeyPrefix+key).Result()
+	return result, err
 }
