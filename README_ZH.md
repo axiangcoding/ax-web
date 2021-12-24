@@ -148,5 +148,5 @@ file.path = "./logs/"
 
 ## 联系我
 
-邮件发送至<wyxworkmail@163.com>
+邮件发送至 <axiangcoding@gmail.com>
 
