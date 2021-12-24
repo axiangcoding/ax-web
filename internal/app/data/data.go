@@ -33,7 +33,7 @@ func initDB() *gorm.DB {
 	if err != nil {
 		logging.Fatal(err)
 	}
-	//auto migrate should not be used
+	// auto migrate should not be used in production mode
 	if err := db.AutoMigrate(
 		&schema.User{},
 	); err != nil {
@@ -46,7 +46,6 @@ func initDB() *gorm.DB {
 	}
 	s.SetMaxOpenConns(conf.Config.App.Data.Database.MaxOpenConn)
 	s.SetMaxIdleConns(conf.Config.App.Data.Database.MaxIdleConn)
-	logging.Info(s.Stats())
 	return db
 }
 

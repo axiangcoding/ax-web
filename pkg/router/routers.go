@@ -15,9 +15,14 @@ func InitRouter() *gin.Engine {
 	// 全局中间件
 	// 使用自定义中间件
 	r.Use(middleware.Logger())
-
 	// Recovery 中间件会 recover 任何 panic。如果有 panic 的话，会写入 500。
 	r.Use(gin.Recovery())
+	setSwagger(r)
+	setRouterV1(r)
+	return r
+}
+
+func setRouterV1(r *gin.Engine) {
 	groupV1 := r.Group("/api/v1")
 	{
 		demo := groupV1.Group("/demo", middleware.AuthCheck())
@@ -39,18 +44,14 @@ func InitRouter() *gin.Engine {
 		{
 			system.GET("/info", v1.SystemInfo)
 		}
-
 	}
-
-	if conf.Config.App.Swagger.Enable {
-		setSwaggerInfo()
-		r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-	}
-	return r
 }
 
-func setSwaggerInfo() {
-	docs.SwaggerInfo.Version = conf.Config.App.Version
-	docs.SwaggerInfo.Title = conf.Config.App.Name
-	docs.SwaggerInfo.BasePath = conf.Config.Server.BasePath
+func setSwagger(r *gin.Engine) {
+	if conf.Config.App.Swagger.Enable {
+		docs.SwaggerInfo.Version = conf.Config.App.Version
+		docs.SwaggerInfo.Title = conf.Config.App.Name
+		docs.SwaggerInfo.BasePath = conf.Config.Server.BasePath
+		r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	}
 }
