@@ -146,6 +146,6 @@ Answer: Compared with the scaffolding of the common Go language web framework, t
 
 Answer: This project can be used in production. However, if it is a large-scale company project, then we still recommend that you use a scaffolding project with higher community activity as the start-up template of the project. Projects with high community activity mean that BUGs found can be helped in time, and the team’s acceptance of code structure and specifications is also higher
 
-## contact me
+## Contact me
 
 Email to <axiangcoding@gmail.com>
