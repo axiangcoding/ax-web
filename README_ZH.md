@@ -23,7 +23,7 @@
 1. 请确保你的开发机器上已经安装了Go。安装的方式可以参考 https://golang.org/dl/
 2. 本项目采用Make来简化构建，请确保安装了Make。Windows下的安装方式可以参考 http://gnuwin32.sourceforge.net/packages/make.htm
 3. 本项目采用了Docker来建立开发环境并构建项目的镜像，请确保安装了Docker。安装的方式可以参考官网 https://www.docker.com/get-started
-4. 本项目需要Redis和Mysql作为数据源。我们**强烈建议**您使用项目提供的docker-compose搭建（请参考 [build-development-env_ZH.md](./docs/build-development-env_ZH.md)）。当然，您也可以自己搭建Redis和Mysql服务
+4. 本项目需要Redis和Mysql作为数据源。我们**强烈建议**您使用项目提供的docker-compose搭建。当然，您也可以自己搭建Redis和Mysql服务
 
 ### 配置
 
@@ -75,7 +75,6 @@ file.path = "./logs/"
    $ docker-compose -f docker/docker-compose.yaml up -d
    ```
 
-   完整的介绍请参考 [build-development-env_ZH.md](./docs/build-development-env_ZH.md)
 
 4. （可选）你也可以自己运行一个本机可访问的Mysql和Redis，并将配置文件中的对应配置项修改为正确的值
 
