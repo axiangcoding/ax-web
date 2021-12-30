@@ -23,7 +23,7 @@ Under normal circumstances, the environment configuration of Windows will be sli
 1. Make sure that Go has been installed on your development machine. For the installation method, please refer to https://golang.org/dl/
 2. This project uses Make to simplify the build. Please make sure that Make is installed. For the installation method under Windows, please refer to http://gnuwin32.sourceforge.net/packages/make.htm
 3. This project uses Docker to establish the development environment and build the project's image. Please make sure that Docker is installed. For the installation method, please refer to the official website https://www.docker.com/get-started
-4. This project requires Redis and Mysql as data sources. We **strongly recommend** that you use the docker-compose provided by the project to build (please refer to [build-development-env_ZH.md](./docs/build-development-env_ZH.md)). Of course, you can also build Redis and Mysql services by yourself
+4. This project requires Redis and Mysql as data sources. We **strongly recommend** that you use the docker-compose provided by the project to build. Of course, you can also build Redis and Mysql services by yourself
 
 ### Configuration
 
@@ -75,7 +75,6 @@ The operation of this project is very simple, please follow the procedure below.
    $ docker-compose -f docker/docker-compose.yaml up -d
    ```
 
-   For a complete introduction, please refer to [build-development-env_ZH.md](./docs/build-development-env_ZH.md)
 
 4. (Optional) You can also run a locally accessible Mysql and Redis by yourself, and modify the corresponding configuration items in the configuration file to the correct value
 
