@@ -1,10 +1,12 @@
 FROM golang:1.17-alpine as build
-ENV GOPROXY https://goproxy.cn,direct
+ENV GOPROXY=https://proxy.golang.com.cn,direct
 WORKDIR /build
 COPY . /build/
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o application .
 
-FROM scratch as prod
+FROM busybox:stable as prod
+
+COPY --from=build /etc/ssl/certs /etc/ssl/certs
 COPY --from=build /build/application /app/application
 # copy config file
 COPY --from=build /build/config /app/config
