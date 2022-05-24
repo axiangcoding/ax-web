@@ -1,23 +1,26 @@
 [app]
 version = "1.0.0"
-name = "axiangcoding/go-gin-template"
+name = "axiangcoding/antonstar/api-system"
 
 [app.log]
 level = "INFO"
 file.enable = false
+file.encoder = "console"
 file.path = "./logs/"
 
-[app.token]
+[app.auth]
 secret = "r@ndomSecretForSign"
 expire_duration = "12h"
-refresh_duration = "10m"
+casbin_model_path = "./config/default/"
+casbin_policy_adapter = "local"
+casbin_policy_path = "./config/default/"
 
 [app.swagger]
 enable = true
 
 [app.data.database]
 driver = "mysql"
-source = "axiangcoding:axiangP@ssword@tcp(127.0.0.1:3306)/some_db?charset=utf8mb4&parseTime=true"
+source = "axiangcoding:axiangcoding@tcp(127.0.0.1:3306)/db?charset=utf8mb4&parseTime=true"
 max_open_conn = 100
 max_idle_conn = 10
 
@@ -26,9 +29,14 @@ max_idle_conn = 10
 driver = "redis"
 source = "redis://localhost:6379/0"
 
+[app.mq]
+source = "amqp://localhost:5672"
+
+
 [app.response]
 # hide error details
 hide_error_details = false
+
 
 [server]
 run_mode = "debug"
