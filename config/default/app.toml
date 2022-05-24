@@ -9,9 +9,8 @@ file.encoder = "console"
 file.path = "./logs/"
 
 [app.auth]
-#secret = "r@ndomSecretForSign"
+secret = "r@ndomSecretForSign"
 expire_duration = "12h"
-refresh_duration = "10m"
 casbin_model_path = "./config/default/"
 casbin_policy_adapter = "local"
 casbin_policy_path = "./config/default/"
@@ -21,7 +20,7 @@ enable = true
 
 [app.data.database]
 driver = "mysql"
-source = "antonstar:AntonStarP@ssword.@tcp(127.0.0.1:3306)/anton_star?charset=utf8mb4&parseTime=true"
+source = "axiangcoding:axiangcoding@tcp(127.0.0.1:3306)/db?charset=utf8mb4&parseTime=true"
 max_open_conn = 100
 max_idle_conn = 10
 

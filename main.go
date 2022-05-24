@@ -44,10 +44,6 @@ func init() {
 // @license.name
 // @license.url
 
-// @securityDefinitions.apikey  ApiKeyAuth
-// @in                          header
-// @name                        Authorization
-
 // @accept   json
 // @produce  json
 func main() {

@@ -4,12 +4,17 @@ import (
 	"github.com/axiangcoding/go-gin-template/controller/middleware"
 	"github.com/axiangcoding/go-gin-template/controller/v1"
 	"github.com/axiangcoding/go-gin-template/entity/app"
+	"github.com/axiangcoding/go-gin-template/logging"
 	"github.com/axiangcoding/go-gin-template/settings"
 	"github.com/axiangcoding/go-gin-template/swagger"
 	"github.com/gin-contrib/cors"
+	"github.com/gin-contrib/sessions"
+	"github.com/gin-contrib/sessions/redis"
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
+	"strings"
+	"time"
 )
 
 func InitRouter() *gin.Engine {
@@ -22,8 +27,31 @@ func InitRouter() *gin.Engine {
 	// Recovery 中间件会 recover 任何 panic。如果有 panic 的话，会写入 500。
 	r.Use(gin.Recovery())
 	setCors(r)
+	setSession(r)
 	setRouterV1(r)
 	return r
+}
+
+func setSession(r *gin.Engine) {
+	// gob.Register(axth.DisplayUser{})
+	source := settings.Config.Data.Cache.Source
+	address := strings.ReplaceAll(source, "redis://", "")
+	address = strings.ReplaceAll(address, "/0", "")
+
+	duration, err := time.ParseDuration(settings.Config.Auth.ExpireDuration)
+	if err != nil {
+		logging.Fatal(err)
+	}
+
+	store, err := redis.NewStore(1000, "tcp", address,
+		"", []byte(settings.Config.Auth.Secret))
+	store.Options(sessions.Options{
+		MaxAge: int(duration.Seconds()),
+		Path:   "-"})
+	if err != nil {
+		logging.Fatal(err)
+	}
+	r.Use(sessions.Sessions("template-session", store))
 }
 
 // 设置cors头
@@ -53,6 +81,16 @@ func setRouterV1(r *gin.Engine) {
 		{
 			demo.GET("/get", v1.DemoGet)
 			demo.POST("/post", v1.DemoPost)
+		}
+		user := groupV1.Group("/user")
+		{
+			user.POST("/login", v1.UserLogin)
+			user.POST("/register", v1.UserRegister)
+			user.POST("/me", v1.UserMe)
+		}
+		system := groupV1.Group("/system")
+		{
+			system.GET("/info", v1.SystemInfo)
 		}
 	}
 }

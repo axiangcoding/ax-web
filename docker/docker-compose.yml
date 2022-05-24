@@ -11,8 +11,8 @@ services:
       MYSQL_DATABASE: db
     ports:
       - "3306:3306"
-    volumes:
-      - ./volume/mysql:/var/lib/mysql
+#    volumes:
+#      - ./volume/mysql:/var/lib/mysql
   phpmyadmin:
     image: phpmyadmin:latest
     # restart: always

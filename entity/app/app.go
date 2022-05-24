@@ -68,7 +68,7 @@ func Success(c *gin.Context, data interface{}) {
 // business failed response
 // 返回业务逻辑失败
 func BizFailed(c *gin.Context, errCode int, err ...error) {
-	logging.Errorf("Biz failed with code [%d].", errCode)
+	logging.Errorf("Biz failed with code [%d], errors: %s.", errCode, err)
 	HttpResponse(c, http.StatusOK, errCode, generateErrJson(err))
 }
 
@@ -76,7 +76,7 @@ func BizFailed(c *gin.Context, errCode int, err ...error) {
 // bad request response
 // 返回错误参数请求
 func BadRequest(c *gin.Context, errCode int, err ...error) {
-	logging.Infof("Bad request with code [%d].", errCode)
+	logging.Infof("Bad request with code [%d], errors: %s.", errCode, err)
 	HttpResponse(c, http.StatusBadRequest, errCode, generateErrJson(err))
 	c.Abort()
 }

@@ -44,7 +44,7 @@ var doc = `{
                         "maxLength": 255,
                         "minLength": 10,
                         "type": "string",
-                        "description": "param1, max 255 words",
+                        "description": "param1, min 10 words and max 255 words",
                         "name": "param1",
                         "in": "query"
                     },
@@ -58,7 +58,7 @@ var doc = `{
                     {
                         "type": "string",
                         "description": "param3, if it's null, validate nothing. if it's not null, must match email regex",
-                        "name": "paramEmail",
+                        "name": "param3",
                         "in": "query"
                     }
                 ],
@@ -114,6 +114,73 @@ var doc = `{
                     }
                 }
             }
+        },
+        "/v1/user/login": {
+            "post": {
+                "tags": [
+                    "User API"
+                ],
+                "parameters": [
+                    {
+                        "description": "login param",
+                        "name": "param",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/v1.LoginParam"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/app.ApiJson"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/user/me": {
+            "post": {
+                "tags": [
+                    "User API"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/app.ApiJson"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/user/register": {
+            "post": {
+                "tags": [
+                    "User API"
+                ],
+                "parameters": [
+                    {
+                        "description": "register param",
+                        "name": "param",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/v1.RegisterParam"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/app.ApiJson"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -136,7 +203,7 @@ var doc = `{
             ],
             "properties": {
                 "param1": {
-                    "description": "param1, max 255 words",
+                    "description": "param1, min 10 words and max 255 words",
                     "type": "string",
                     "maxLength": 255,
                     "minLength": 10
@@ -145,8 +212,45 @@ var doc = `{
                     "description": "param2, required",
                     "type": "string"
                 },
-                "paramEmail": {
+                "param3": {
                     "description": "param3, if it's null, validate nothing. if it's not null, must match email regex",
+                    "type": "string"
+                }
+            }
+        },
+        "v1.LoginParam": {
+            "type": "object",
+            "required": [
+                "loginName",
+                "password"
+            ],
+            "properties": {
+                "loginName": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "v1.RegisterParam": {
+            "type": "object",
+            "required": [
+                "displayName",
+                "email",
+                "password"
+            ],
+            "properties": {
+                "displayName": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "phone": {
                     "type": "string"
                 }
             }

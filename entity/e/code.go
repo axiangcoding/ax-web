@@ -11,17 +11,9 @@ const (
 	NoPermission    = 11003
 	CaptchaNotValid = 11004
 
-	LoginFailed    = 12000
-	RegisterFailed = 12001
-
-	ReachRefreshLimit = 13000
-
-	DuplicateEntry = 14000
-
-	FileFormNotValid   = 15000
-	FileCantBeOpened   = 15001
-	FileCantBeSaved    = 15002
-	FileTypeNotAllowed = 15003
+	UserLoginFailed    = 12000
+	UserRegisterFailed = 12001
+	UserExist          = 12002
 )
 
 var errCodeText = map[int]string{
@@ -35,15 +27,9 @@ var errCodeText = map[int]string{
 	NoPermission:    "No permission",
 	CaptchaNotValid: "Captcha not valid",
 
-	LoginFailed:       "Login failed",
-	RegisterFailed:    "Register failed",
-	ReachRefreshLimit: "Reach Refresh Limit",
-
-	DuplicateEntry: "Entry duplicated",
-
-	FileFormNotValid:   "File form not valid",
-	FileCantBeSaved:    "File can't be saved",
-	FileTypeNotAllowed: "File type not allow",
+	UserLoginFailed:    "Login failed",
+	UserRegisterFailed: "Register failed",
+	UserExist:          "User Exist",
 }
 
 func CodeText(code int) string {

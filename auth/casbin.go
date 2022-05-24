@@ -9,7 +9,7 @@ import (
 	"path"
 )
 
-var enforcer *casbin.Enforcer
+var casbinEnforcer *casbin.Enforcer
 
 func SetupCasbin() {
 
@@ -43,11 +43,11 @@ func SetupCasbin() {
 	}
 	err := e.LoadPolicy()
 	if err != nil {
-		logging.Error(err)
+		logging.Fatal(err)
 	}
-	enforcer = e
+	casbinEnforcer = e
 }
 
-func GetEnforcer() *casbin.Enforcer {
-	return enforcer
+func GetCasbinEnforcer() *casbin.Enforcer {
+	return casbinEnforcer
 }
