@@ -1,9 +1,9 @@
 package auth
 
 import (
-	"github.com/axiangcoding/go-gin-template/data"
-	"github.com/axiangcoding/go-gin-template/logging"
-	"github.com/axiangcoding/go-gin-template/settings"
+	"github.com/axiangcoding/ax-web/data"
+	"github.com/axiangcoding/ax-web/logging"
+	"github.com/axiangcoding/ax-web/settings"
 	"github.com/casbin/casbin/v2"
 	gormadapter "github.com/casbin/gorm-adapter/v3"
 	"path"

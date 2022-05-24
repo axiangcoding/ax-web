@@ -2,8 +2,8 @@ package cache
 
 import (
 	"context"
-	"github.com/axiangcoding/go-gin-template/logging"
-	"github.com/axiangcoding/go-gin-template/settings"
+	"github.com/axiangcoding/ax-web/logging"
+	"github.com/axiangcoding/ax-web/settings"
 	"github.com/go-redis/redis/v8"
 )
 

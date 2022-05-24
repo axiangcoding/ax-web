@@ -1,12 +1,12 @@
 package router
 
 import (
-	"github.com/axiangcoding/go-gin-template/controller/middleware"
-	"github.com/axiangcoding/go-gin-template/controller/v1"
-	"github.com/axiangcoding/go-gin-template/entity/app"
-	"github.com/axiangcoding/go-gin-template/logging"
-	"github.com/axiangcoding/go-gin-template/settings"
-	"github.com/axiangcoding/go-gin-template/swagger"
+	"github.com/axiangcoding/ax-web/controller/middleware"
+	"github.com/axiangcoding/ax-web/controller/v1"
+	"github.com/axiangcoding/ax-web/entity/app"
+	"github.com/axiangcoding/ax-web/logging"
+	"github.com/axiangcoding/ax-web/settings"
+	"github.com/axiangcoding/ax-web/swagger"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/redis"

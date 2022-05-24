@@ -16,7 +16,7 @@ func Setup() {
 	viper.AddConfigPath("config/")
 	viper.AddConfigPath("config/default/")
 	viper.AutomaticEnv()
-	viper.SetEnvPrefix("as_api")
+	viper.SetEnvPrefix("ax")
 	replacer := strings.NewReplacer(".", "_")
 	viper.SetEnvKeyReplacer(replacer)
 	if err := viper.ReadInConfig(); err != nil {

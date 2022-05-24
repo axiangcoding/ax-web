@@ -1,7 +1,7 @@
 package logging
 
 import (
-	"github.com/axiangcoding/go-gin-template/settings"
+	"github.com/axiangcoding/ax-web/settings"
 	"log"
 	"path"
 

@@ -1,9 +1,9 @@
 package auth
 
 import (
+	"github.com/axiangcoding/ax-web/logging"
+	"github.com/axiangcoding/ax-web/settings"
 	"github.com/axiangcoding/axth"
-	"github.com/axiangcoding/go-gin-template/logging"
-	"github.com/axiangcoding/go-gin-template/settings"
 )
 
 var axthEnforcer *axth.Enforcer

@@ -1,8 +1,8 @@
 package service
 
 import (
+	"github.com/axiangcoding/ax-web/auth"
 	"github.com/axiangcoding/axth"
-	"github.com/axiangcoding/go-gin-template/auth"
 	"github.com/gin-gonic/gin"
 )
 

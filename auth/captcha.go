@@ -2,7 +2,7 @@ package auth
 
 import (
 	"context"
-	"github.com/axiangcoding/go-gin-template/cache"
+	"github.com/axiangcoding/ax-web/cache"
 	"github.com/dchest/captcha"
 	"time"
 )

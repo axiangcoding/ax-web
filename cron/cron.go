@@ -1,7 +1,7 @@
 package cron
 
 import (
-	"github.com/axiangcoding/go-gin-template/logging"
+	"github.com/axiangcoding/ax-web/logging"
 	"github.com/robfig/cron/v3"
 )
 
