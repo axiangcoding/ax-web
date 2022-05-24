@@ -19,7 +19,7 @@ check:
 
 build-image:
 	@echo "docker required"
-	docker build . -t axiangcoding/antonstar/api-system:latest
+	docker build . -t axiangcoding/go-gin-template:latest
 
 run:
 	go run ./main.go

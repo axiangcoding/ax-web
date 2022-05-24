@@ -33,6 +33,72 @@ var doc = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/v1/demo/get": {
+            "get": {
+                "tags": [
+                    "Demo API"
+                ],
+                "summary": "Demo for Get",
+                "parameters": [
+                    {
+                        "maxLength": 255,
+                        "minLength": 10,
+                        "type": "string",
+                        "description": "param1, max 255 words",
+                        "name": "param1",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "param2, required",
+                        "name": "param2",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "param3, if it's null, validate nothing. if it's not null, must match email regex",
+                        "name": "paramEmail",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/app.ApiJson"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/demo/post": {
+            "post": {
+                "tags": [
+                    "Demo API"
+                ],
+                "summary": "Demo for Post",
+                "parameters": [
+                    {
+                        "description": "getParam",
+                        "name": "param",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/v1.CommonParam"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/app.ApiJson"
+                        }
+                    }
+                }
+            }
+        },
         "/v1/system/info": {
             "get": {
                 "tags": [
@@ -59,6 +125,28 @@ var doc = `{
                 },
                 "data": {},
                 "msg": {
+                    "type": "string"
+                }
+            }
+        },
+        "v1.CommonParam": {
+            "type": "object",
+            "required": [
+                "param2"
+            ],
+            "properties": {
+                "param1": {
+                    "description": "param1, max 255 words",
+                    "type": "string",
+                    "maxLength": 255,
+                    "minLength": 10
+                },
+                "param2": {
+                    "description": "param2, required",
+                    "type": "string"
+                },
+                "paramEmail": {
+                    "description": "param3, if it's null, validate nothing. if it's not null, must match email regex",
                     "type": "string"
                 }
             }

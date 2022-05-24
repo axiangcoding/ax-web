@@ -37,17 +37,6 @@ func generateErrJson(errs []error) *ErrJson {
 			if errors.As(err, &validErrors) {
 				for _, err := range err.(validator.ValidationErrors) {
 					errMessages = append(errMessages, fmt.Sprintf(validFailedErrMsg, err.Field(), err.Tag()))
-					// fmt.Println(err.Namespace())
-					// fmt.Println(err.Field())
-					// fmt.Println(err.StructNamespace())
-					// fmt.Println(err.StructField())
-					// fmt.Println(err.Tag())
-					// fmt.Println(err.ActualTag())
-					// fmt.Println(err.Kind())
-					// fmt.Println(err.Type())
-					// fmt.Println(err.Value())
-					// fmt.Println(err.Param())
-					// fmt.Println()
 				}
 			} else {
 				errMessages = append(errMessages, err.Error())

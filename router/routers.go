@@ -49,9 +49,10 @@ func setRouterV1(r *gin.Engine) {
 	setSwagger(base)
 	groupV1 := base.Group("/v1")
 	{
-		system := groupV1.Group("/system")
+		demo := groupV1.Group("/demo")
 		{
-			system.GET("/info", v1.SystemInfo)
+			demo.GET("/get", v1.DemoGet)
+			demo.POST("/post", v1.DemoPost)
 		}
 	}
 }
