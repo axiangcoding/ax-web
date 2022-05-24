@@ -1,7 +1,7 @@
 package validation
 
 import (
-	"github.com/axiangcoding/go-gin-template/logging"
+	"github.com/axiangcoding/ax-web/logging"
 	"github.com/gin-gonic/gin/binding"
 	"github.com/go-playground/validator/v10"
 	"regexp"

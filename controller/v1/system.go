@@ -1,8 +1,8 @@
 package v1
 
 import (
-	"github.com/axiangcoding/go-gin-template/entity/app"
-	"github.com/axiangcoding/go-gin-template/settings"
+	"github.com/axiangcoding/ax-web/entity/app"
+	"github.com/axiangcoding/ax-web/settings"
 	"github.com/gin-gonic/gin"
 )
 

@@ -1,6 +1,6 @@
 [app]
-version = "1.0.0"
-name = "axiangcoding/antonstar/api-system"
+version = "v2.x"
+name = "github.com/axiangcoding/ax-web"
 
 [app.log]
 level = "INFO"
