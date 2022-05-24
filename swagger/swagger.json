@@ -1,0 +1,58 @@
+{
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "info": {
+        "description": "安东星接口文档",
+        "title": "安东星",
+        "contact": {
+            "name": "axiangcoding",
+            "email": "axiangcoding@gmail.com"
+        },
+        "license": {},
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/v1/system/info": {
+            "get": {
+                "tags": [
+                    "System API"
+                ],
+                "summary": "System Info",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/app.ApiJson"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "app.ApiJson": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {},
+                "msg": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
+}

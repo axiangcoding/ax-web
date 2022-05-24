@@ -1,0 +1,38 @@
+consumes:
+- application/json
+definitions:
+  app.ApiJson:
+    properties:
+      code:
+        type: integer
+      data: {}
+      msg:
+        type: string
+    type: object
+info:
+  contact:
+    email: axiangcoding@gmail.com
+    name: axiangcoding
+  description: 安东星接口文档
+  license: {}
+  title: 安东星
+  version: 1.0.0
+paths:
+  /v1/system/info:
+    get:
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.ApiJson'
+      summary: System Info
+      tags:
+      - System API
+produces:
+- application/json
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

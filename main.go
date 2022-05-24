@@ -3,12 +3,15 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/axiangcoding/go-gin-template/internal/app/conf"
-	"github.com/axiangcoding/go-gin-template/internal/app/data"
-	"github.com/axiangcoding/go-gin-template/pkg/auth"
-	"github.com/axiangcoding/go-gin-template/pkg/cache"
-	"github.com/axiangcoding/go-gin-template/pkg/logging"
-	"github.com/axiangcoding/go-gin-template/pkg/router"
+	"github.com/axiangcoding/go-gin-template/auth"
+	"github.com/axiangcoding/go-gin-template/cache"
+	"github.com/axiangcoding/go-gin-template/controller/validation"
+	"github.com/axiangcoding/go-gin-template/cron"
+	"github.com/axiangcoding/go-gin-template/data"
+	"github.com/axiangcoding/go-gin-template/logging"
+	"github.com/axiangcoding/go-gin-template/mq"
+	"github.com/axiangcoding/go-gin-template/router"
+	"github.com/axiangcoding/go-gin-template/settings"
 	"net/http"
 	"os"
 	"os/signal"
@@ -19,16 +22,19 @@ import (
 )
 
 func init() {
-	conf.Setup()
+	settings.Setup()
 	logging.Setup()
 	data.Setup()
 	cache.Setup()
+	mq.Setup()
+	cron.Setup()
 	auth.Setup()
+	validation.Setup()
 }
 
-// @title        Golang Gin Template API
+// @title        安东星
 // @version      1.0.0
-// @description  An example of gin
+// @description  安东星接口文档
 // @termsOfService
 
 // @contact.name  axiangcoding
@@ -40,16 +46,16 @@ func init() {
 
 // @securityDefinitions.apikey  ApiKeyAuth
 // @in                          header
-// @name                        token
+// @name                        Authorization
 
 // @accept   json
 // @produce  json
 func main() {
-	runMode := conf.Config.Server.RunMode
+	runMode := settings.Config.Server.RunMode
 	gin.SetMode(runMode)
 	r := router.InitRouter()
 	srv := &http.Server{
-		Addr:    fmt.Sprintf(":%s", conf.Config.Server.Port),
+		Addr:    fmt.Sprintf(":%s", settings.Config.Server.Port),
 		Handler: r,
 	}
 	// Initialize the server in the goroutine so that it will not block the graceful stop processing below
