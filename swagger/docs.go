@@ -255,13 +255,6 @@ var doc = `{
                 }
             }
         }
-    },
-    "securityDefinitions": {
-        "ApiKeyAuth": {
-            "type": "apiKey",
-            "name": "Authorization",
-            "in": "header"
-        }
     }
 }`
 
@@ -280,8 +273,8 @@ var SwaggerInfo = swaggerInfo{
 	Host:        "",
 	BasePath:    "",
 	Schemes:     []string{},
-	Title:       "安东星",
-	Description: "安东星接口文档",
+	Title:       "axiangcoding/gin-template",
+	Description: "This project is a web application scaffold developed using the Go language. It integrates some of the most commonly used frameworks in the Go language ecology and provides a relatively light development experience, which is especially suitable for small projects as an initial template.",
 }
 
 type s struct{}

@@ -19,7 +19,7 @@ type LoginParam struct {
 // @Summary
 // @Tags     User API
 // @Param    param  body      LoginParam   true  "login param"
-// @Success  200    {object}  app.ApiJson    ""
+// @Success  200  {object}  app.ApiJson  ""
 // @Router   /v1/user/login [post]
 func UserLogin(c *gin.Context) {
 	var param LoginParam
@@ -57,7 +57,7 @@ type RegisterParam struct {
 // @Summary
 // @Tags     User API
 // @Param    param  body      RegisterParam  true  "register param"
-// @Success  200  {object}  app.ApiJson  ""
+// @Success  200    {object}  app.ApiJson    ""
 // @Router   /v1/user/register [post]
 func UserRegister(c *gin.Context) {
 	var param RegisterParam

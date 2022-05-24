@@ -32,9 +32,9 @@ func init() {
 	validation.Setup()
 }
 
-// @title        安东星
+// @title        axiangcoding/gin-template
 // @version      1.0.0
-// @description  安东星接口文档
+// @description  This project is a web application scaffold developed using the Go language. It integrates some of the most commonly used frameworks in the Go language ecology and provides a relatively light development experience, which is especially suitable for small projects as an initial template.
 // @termsOfService
 
 // @contact.name  axiangcoding
