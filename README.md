@@ -10,7 +10,7 @@ Switch language: [中文](./README_ZH.md)|English
 
 `ax-web` is a lightweight web application template developed in Go language. It is a secondary integration of some frameworks, especially suitable for small project development.
 
-`ax-web` uses the [Gin](https://github.com/gin-gonic/gin) web framework as the basic structure, and also integrates some commonly used features. For a specific list, see [features]( ./README_EN.md#features). At the same time, it also standardized the writing of the code through some practical examples, hoping to provide a unified coding style and provide the best coding experience
+`ax-web` uses the [Gin](https://github.com/gin-gonic/gin) web framework as the basic structure, and also integrates some commonly used features. For a specific list, see [features]( ./README.md#features). At the same time, it also standardized the writing of the code through some practical examples, hoping to provide a unified coding style and provide the best coding experience
 
 ***Note: v1.x version and v2.x version are incompatible with each other, please do not use v1.x version, but use v2.x version, the code structure in v2.x version has been changed, more in line with the new go Developed specifications, enhanced some features, and fixed a lot of bugs***
 
