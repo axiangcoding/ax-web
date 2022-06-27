@@ -9,7 +9,11 @@ import (
 var axthEnforcer *axth.Enforcer
 
 func SetupAxth() {
-	e, err := axth.NewEnforcer(&axth.Config{DBDsn: settings.Config.Data.Database.Source})
+	options, err := axth.DefaultOptions(settings.Config.Data.Database.Source)
+	if err != nil {
+		logging.Fatal(err)
+	}
+	e, err := axth.NewEnforcer(options)
 	if err != nil {
 		logging.Fatal(err)
 	}
