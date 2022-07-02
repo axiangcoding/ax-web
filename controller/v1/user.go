@@ -1,6 +1,7 @@
 package v1
 
 import (
+	"fmt"
 	"github.com/axiangcoding/ax-web/entity/app"
 	"github.com/axiangcoding/ax-web/entity/e"
 	"github.com/axiangcoding/ax-web/service"
@@ -98,7 +99,7 @@ func UserRegister(c *gin.Context) {
 func UserMe(c *gin.Context) {
 	session := sessions.Default(c)
 	userId := session.Get("userId")
-	user, err := service.FindUser(c, userId.(string))
+	user, err := service.FindUser(c, fmt.Sprintf("%v", userId))
 	if err != nil {
 		app.BizFailed(c, e.Error, err)
 		return

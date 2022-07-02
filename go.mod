@@ -3,7 +3,7 @@ module github.com/axiangcoding/ax-web
 go 1.17
 
 require (
-	github.com/axiangcoding/axth v0.3.0
+	github.com/axiangcoding/axth v0.4.0
 	github.com/casbin/casbin/v2 v2.47.1
 	github.com/casbin/gorm-adapter/v3 v3.7.1
 	github.com/dchest/captcha v0.0.0-20200903113550-03f5f0333e1f

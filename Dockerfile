@@ -4,7 +4,7 @@ WORKDIR /build
 COPY . /build/
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o application .
 
-FROM busybox:stable as prod
+FROM alpine:latest as prod
 
 COPY --from=build /etc/ssl/certs /etc/ssl/certs
 COPY --from=build /build/application /app/application
