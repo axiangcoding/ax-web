@@ -1,15 +1,19 @@
 package auth
 
 import (
+	"github.com/axiangcoding/ax-web/data"
 	"github.com/axiangcoding/ax-web/logging"
-	"github.com/axiangcoding/ax-web/settings"
 	"github.com/axiangcoding/axth"
 )
 
 var axthEnforcer *axth.Enforcer
 
 func SetupAxth() {
-	e, err := axth.NewEnforcer(&axth.Config{DBDsn: settings.Config.Data.Database.Source})
+	options, err := axth.DefaultOptions()
+	if err != nil {
+		logging.Fatal(err)
+	}
+	e, err := axth.NewEnforcer(data.GetDB(), options)
 	if err != nil {
 		logging.Fatal(err)
 	}

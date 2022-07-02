@@ -9,7 +9,6 @@ import (
 	"github.com/axiangcoding/ax-web/cron"
 	"github.com/axiangcoding/ax-web/data"
 	"github.com/axiangcoding/ax-web/logging"
-	"github.com/axiangcoding/ax-web/mq"
 	"github.com/axiangcoding/ax-web/router"
 	"github.com/axiangcoding/ax-web/settings"
 	"net/http"
@@ -26,7 +25,7 @@ func init() {
 	logging.Setup()
 	data.Setup()
 	cache.Setup()
-	mq.Setup()
+	// mq.Setup()
 	cron.Setup()
 	auth.Setup()
 	validation.Setup()
