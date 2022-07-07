@@ -33,7 +33,6 @@ func InitRouter() *gin.Engine {
 }
 
 func setSession(r *gin.Engine) {
-	// gob.Register(axth.DisplayUser{})
 	source := settings.Config.Data.Cache.Source
 	address := strings.ReplaceAll(source, "redis://", "")
 	address = strings.ReplaceAll(address, "/0", "")
@@ -46,12 +45,13 @@ func setSession(r *gin.Engine) {
 	store, err := redis.NewStore(1000, "tcp", address,
 		"", []byte(settings.Config.Auth.Secret))
 	store.Options(sessions.Options{
-		MaxAge: int(duration.Seconds()),
-		Path:   "-"})
+		MaxAge:   int(duration.Seconds()),
+		Path:     "-",
+		HttpOnly: true})
 	if err != nil {
 		logging.Fatal(err)
 	}
-	r.Use(sessions.Sessions("template-session", store))
+	r.Use(sessions.Sessions("session", store))
 }
 
 // 设置cors头
