@@ -1,6 +1,7 @@
 package v1
 
 import (
+	"errors"
 	"fmt"
 	"github.com/axiangcoding/ax-web/entity/app"
 	"github.com/axiangcoding/ax-web/entity/e"
@@ -31,7 +32,11 @@ func UserLogin(c *gin.Context) {
 	}
 	user, err := service.UserLogin(c, param.LoginName, param.Password)
 	if err != nil {
-		app.BizFailed(c, e.UserLoginFailed, err)
+		if errors.Is(err, axth.ErrUserPasswordNotMatched) {
+			app.BizFailed(c, e.UserPasswordNotMatched)
+		} else {
+			app.BizFailed(c, e.UserLoginFailed, err)
+		}
 		return
 	}
 	session := sessions.Default(c)

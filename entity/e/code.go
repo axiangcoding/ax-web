@@ -11,9 +11,10 @@ const (
 	NoPermission    = 11003
 	CaptchaNotValid = 11004
 
-	UserLoginFailed    = 12000
-	UserRegisterFailed = 12001
-	UserExist          = 12002
+	UserLoginFailed        = 12000
+	UserRegisterFailed     = 12001
+	UserExist              = 12002
+	UserPasswordNotMatched = 12003
 )
 
 var errCodeText = map[int]string{
@@ -27,9 +28,10 @@ var errCodeText = map[int]string{
 	NoPermission:    "No permission",
 	CaptchaNotValid: "Captcha not valid",
 
-	UserLoginFailed:    "Login failed",
-	UserRegisterFailed: "Register failed",
-	UserExist:          "User Exist",
+	UserLoginFailed:        "Login failed",
+	UserRegisterFailed:     "Register failed",
+	UserExist:              "User Exist",
+	UserPasswordNotMatched: "User username or password not matched",
 }
 
 func CodeText(code int) string {
