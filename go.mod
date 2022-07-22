@@ -1,6 +1,6 @@
 module github.com/axiangcoding/ax-web
 
-go 1.17
+go 1.18
 
 require (
 	github.com/axiangcoding/axth v0.5.0

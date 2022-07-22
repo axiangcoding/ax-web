@@ -25,7 +25,6 @@ func init() {
 	logging.Setup()
 	data.Setup()
 	cache.Setup()
-	// mq.Setup()
 	cron.Setup()
 	auth.Setup()
 	validation.Setup()
@@ -78,4 +77,15 @@ func main() {
 	}
 
 	logging.Info("Server exiting")
+}
+
+func GoWithRecover(f func()) {
+	go func(handler func()) {
+		defer func() {
+			if r := recover(); r != nil {
+				logging.Errorf("recover from go func error. %s", r)
+			}
+		}()
+		handler()
+	}(f)
 }
