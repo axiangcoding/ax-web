@@ -27,12 +27,12 @@ func InitRouter() *gin.Engine {
 	// Recovery 中间件会 recover 任何 panic。如果有 panic 的话，会写入 500。
 	r.Use(gin.Recovery())
 	setCors(r)
-	setSession(r)
+	setSessionStore(r)
 	setRouterV1(r)
 	return r
 }
 
-func setSession(r *gin.Engine) {
+func setSessionStore(r *gin.Engine) {
 	source := settings.Config.Data.Cache.Source
 	address := strings.ReplaceAll(source, "redis://", "")
 	address = strings.ReplaceAll(address, "/0", "")
@@ -44,13 +44,16 @@ func setSession(r *gin.Engine) {
 
 	store, err := redis.NewStore(1000, "tcp", address,
 		"", []byte(settings.Config.Auth.Secret))
+	if err != nil {
+		logging.Fatal(err)
+	}
+	if err := redis.SetKeyPrefix(store, "Session:"); err != nil {
+		logging.Fatal(err)
+	}
 	store.Options(sessions.Options{
 		MaxAge:   int(duration.Seconds()),
 		Path:     "-",
 		HttpOnly: true})
-	if err != nil {
-		logging.Fatal(err)
-	}
 	r.Use(sessions.Sessions("session", store))
 }
 
