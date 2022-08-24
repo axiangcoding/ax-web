@@ -64,7 +64,7 @@ func selectDbDialect() gorm.Dialector {
 // 自动更新表结构
 func autoMigrate(db *gorm.DB) {
 	if err := db.AutoMigrate(
-		// 	TODO place table struct here to auto migrate
+	// 	TODO place table struct here to auto migrate
 	); err != nil {
 		logging.Fatal(err)
 	}

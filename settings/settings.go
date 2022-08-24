@@ -13,6 +13,7 @@ func Setup() {
 	viper.SetConfigName("app.toml")
 	viper.SetConfigType("toml")
 	viper.AddConfigPath("config/")
+	// TODO: use go:embed to embed a default config file
 	viper.AddConfigPath("config/default/")
 	viper.AutomaticEnv()
 	viper.SetEnvPrefix("ax")
