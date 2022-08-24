@@ -4,8 +4,8 @@ name = "github.com/axiangcoding/ax-web"
 
 [app.log]
 level = "INFO"
-file.enable = false
-file.encoder = "console"
+file.enable = true
+file.encoder = "json"
 file.path = "./logs/"
 
 [app.auth]
@@ -19,8 +19,10 @@ casbin_policy_path = "./config/default/"
 enable = true
 
 [app.data.database]
-driver = "mysql"
-source = "root:root@tcp(127.0.0.1:3306)/ax-web?charset=utf8mb4&parseTime=true"
+#driver = "mysql"
+#source = "root:root@tcp(127.0.0.1:3306)/ax-web?charset=utf8mb4&parseTime=true"
+driver = "postgres"
+source = "host=127.0.0.1 user=postgres password=example dbname=ax-web port=5432 sslmode=disable"
 max_open_conn = 100
 max_idle_conn = 10
 
@@ -29,14 +31,9 @@ max_idle_conn = 10
 driver = "redis"
 source = "redis://localhost:6379/0"
 
-[app.mq]
-source = "amqp://localhost:5672"
-
-
 [app.response]
 # hide error details
 hide_error_details = false
-
 
 [server]
 run_mode = "debug"

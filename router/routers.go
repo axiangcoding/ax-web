@@ -1,12 +1,14 @@
 package router
 
 import (
+	"github.com/axiangcoding/ax-web/auth"
 	"github.com/axiangcoding/ax-web/controller/middleware"
 	"github.com/axiangcoding/ax-web/controller/v1"
 	"github.com/axiangcoding/ax-web/entity/app"
 	"github.com/axiangcoding/ax-web/logging"
 	"github.com/axiangcoding/ax-web/settings"
 	"github.com/axiangcoding/ax-web/swagger"
+	"github.com/gin-contrib/authz"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/redis"
@@ -25,8 +27,10 @@ func InitRouter() *gin.Engine {
 	// 使用自定义中间件
 	r.Use(middleware.Logger())
 	// Recovery 中间件会 recover 任何 panic。如果有 panic 的话，会写入 500。
+	// TODO: 重写500实现
 	r.Use(gin.Recovery())
 	setCors(r)
+	// setAuthz(r)
 	setSessionStore(r)
 	setRouterV1(r)
 	return r
@@ -73,6 +77,12 @@ func setSwagger(r *gin.RouterGroup) {
 		swagger.SwaggerInfo.BasePath = settings.Config.Server.BasePath
 		r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	}
+}
+
+// FIXME not yet work
+func setAuthz(r *gin.RouterGroup) {
+	e := auth.GetCasbinEnforcer()
+	r.Use(authz.NewAuthorizer(e))
 }
 
 func setRouterV1(r *gin.Engine) {

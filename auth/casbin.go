@@ -11,6 +11,8 @@ import (
 
 var casbinEnforcer *casbin.Enforcer
 
+// SetupCasbin
+// FIXME: not yet implements working policy
 func SetupCasbin() {
 
 	modelPath := settings.Config.Auth.CasbinModelPath
