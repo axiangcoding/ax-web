@@ -30,20 +30,20 @@ func init() {
 	validation.Setup()
 }
 
-// @title        axiangcoding/gin-template
-// @version      1.0.0
-// @description  This project is a web application scaffold developed using the Go language. It integrates some of the most commonly used frameworks in the Go language ecology and provides a relatively light development experience, which is especially suitable for small projects as an initial template.
+// @title       axiangcoding/gin-template
+// @version     1.0.0
+// @description This project is a web application scaffold developed using the Go language. It integrates some of the most commonly used frameworks in the Go language ecology and provides a relatively light development experience, which is especially suitable for small projects as an initial template.
 // @termsOfService
 
-// @contact.name  axiangcoding
+// @contact.name axiangcoding
 // @contact.url
-// @contact.email  axiangcoding@gmail.com
+// @contact.email axiangcoding@gmail.com
 
 // @license.name
 // @license.url
 
-// @accept   json
-// @produce  json
+// @accept  json
+// @produce json
 func main() {
 	runMode := settings.Config.Server.RunMode
 	gin.SetMode(runMode)
@@ -77,15 +77,4 @@ func main() {
 	}
 
 	logging.Info("Server exiting")
-}
-
-func GoWithRecover(f func()) {
-	go func(handler func()) {
-		defer func() {
-			if r := recover(); r != nil {
-				logging.Errorf("recover from go func error. %s", r)
-			}
-		}()
-		handler()
-	}(f)
 }
