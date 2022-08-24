@@ -4,6 +4,7 @@ import (
 	"github.com/axiangcoding/ax-web/logging"
 	"github.com/axiangcoding/ax-web/settings"
 	"gorm.io/driver/mysql"
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 	"gorm.io/gorm/schema"
@@ -19,10 +20,11 @@ func Setup() {
 }
 
 func initDB() *gorm.DB {
-	db, err := gorm.Open(mysql.Open(settings.Config.App.Data.Database.Source),
+	dial := selectDbDialect()
+	db, err := gorm.Open(dial,
 		&gorm.Config{
-			NamingStrategy:                           &schema.NamingStrategy{SingularTable: true},
-			DisableForeignKeyConstraintWhenMigrating: true,
+			NamingStrategy: &schema.NamingStrategy{SingularTable: true},
+			// TODO: use project's log interface to display gorm's log
 			Logger: logger.New(
 				log.New(os.Stdout, "\r\n", log.LstdFlags), // io writer（日志输出的目标，前缀和日志包含的内容——译者注）
 				logger.Config{
@@ -33,35 +35,51 @@ func initDB() *gorm.DB {
 				},
 			)})
 	if err != nil {
-		logging.Fatalf("Can't connect to MySql: %s", err)
+		logging.Fatalf("Can't connect to Database: %s", err)
 	}
-	logging.Info("Database mysql connected success")
-	setProperties(db)
+	logging.Info("Database connected success")
+	setDbProperties(db)
 	autoMigrate(db)
 	return db
 }
 
-func GetDB() *gorm.DB {
-	return db
+func selectDbDialect() gorm.Dialector {
+	var dial gorm.Dialector
+	driver := settings.Config.App.Data.Database.Driver
+	source := settings.Config.App.Data.Database.Source
+	// TODO: support more database driver
+	switch driver {
+	case "mysql":
+		dial = mysql.Open(source)
+		break
+	case "postgres":
+		dial = postgres.Open(source)
+		break
+	default:
+		logging.Fatal("Not support such database driver yet")
+	}
+	return dial
 }
 
 // 自动更新表结构
 func autoMigrate(db *gorm.DB) {
-	if err := db.Set("gorm:table_options",
-		"ENGINE=InnoDB CHARSET=utf8mb4 COLLATE utf8mb4_bin").AutoMigrate(
-	// 	TODO
+	if err := db.AutoMigrate(
+	// 	TODO place table struct here to auto migrate
 	); err != nil {
 		logging.Fatal(err)
-	} else {
-		logging.Info("Auto migrate database table success")
 	}
+	logging.Info("Auto migrate database table success")
 }
 
-func setProperties(db *gorm.DB) {
+func setDbProperties(db *gorm.DB) {
 	s, err := db.DB()
 	if err != nil {
 		logging.Fatal(err)
 	}
 	s.SetMaxOpenConns(settings.Config.App.Data.Database.MaxOpenConn)
 	s.SetMaxIdleConns(settings.Config.App.Data.Database.MaxIdleConn)
+}
+
+func GetDB() *gorm.DB {
+	return db
 }
