@@ -90,6 +90,16 @@ paths:
       summary: Demo for Get
       tags:
       - Demo API
+  /v1/demo/panic:
+    get:
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.ApiJson'
+      summary: Demo for Panic
+      tags:
+      - Demo API
   /v1/demo/post:
     post:
       parameters:

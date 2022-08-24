@@ -56,6 +56,22 @@
                 }
             }
         },
+        "/v1/demo/panic": {
+            "get": {
+                "tags": [
+                    "Demo API"
+                ],
+                "summary": "Demo for Panic",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/app.ApiJson"
+                        }
+                    }
+                }
+            }
+        },
         "/v1/demo/post": {
             "post": {
                 "tags": [

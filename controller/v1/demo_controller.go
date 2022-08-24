@@ -16,11 +16,11 @@ type CommonParam struct {
 }
 
 // DemoGet
-// @Summary  Demo for Get
-// @Tags     Demo API
-// @Param    param  query     CommonParam  true  "getParam"
-// @Success  200    {object}  app.ApiJson  ""
-// @Router   /v1/demo/get [get]
+// @Summary Demo for Get
+// @Tags    Demo API
+// @Param   param query    CommonParam true "getParam"
+// @Success 200   {object} app.ApiJson ""
+// @Router  /v1/demo/get [get]
 func DemoGet(c *gin.Context) {
 	var param CommonParam
 	err := c.ShouldBindQuery(&param)
@@ -32,11 +32,11 @@ func DemoGet(c *gin.Context) {
 }
 
 // DemoPost
-// @Summary  Demo for Post
-// @Tags     Demo API
-// @Param    param  body      CommonParam  true  "getParam"
-// @Success  200    {object}  app.ApiJson  ""
-// @Router   /v1/demo/post [post]
+// @Summary Demo for Post
+// @Tags    Demo API
+// @Param   param body     CommonParam true "getParam"
+// @Success 200   {object} app.ApiJson ""
+// @Router  /v1/demo/post [post]
 func DemoPost(c *gin.Context) {
 	var param CommonParam
 	err := c.ShouldBindJSON(&param)
@@ -45,4 +45,13 @@ func DemoPost(c *gin.Context) {
 		return
 	}
 	app.Success(c, param)
+}
+
+// DemoPanic
+// @Summary Demo for Panic
+// @Tags    Demo API
+// @Success 200 {object} app.ApiJson ""
+// @Router  /v1/demo/panic [get]
+func DemoPanic(c *gin.Context) {
+	panic("just panic")
 }
