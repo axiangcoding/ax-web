@@ -28,7 +28,7 @@ func InitRouter() *gin.Engine {
 	r.Use(middleware.Logger())
 	// Recovery 中间件会 recover 任何 panic。如果有 panic 的话，会写入 500。
 	// TODO: 重写500实现
-	r.Use(gin.Recovery())
+	r.Use(middleware.Recovery())
 	setCors(r)
 	// setAuthz(r)
 	setSessionStore(r)
