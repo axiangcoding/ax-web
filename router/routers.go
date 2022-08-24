@@ -94,6 +94,7 @@ func setRouterV1(r *gin.Engine) {
 		{
 			demo.GET("/get", v1.DemoGet)
 			demo.POST("/post", v1.DemoPost)
+			demo.GET("/panic", v1.DemoPanic)
 		}
 		user := groupV1.Group("/user")
 		{

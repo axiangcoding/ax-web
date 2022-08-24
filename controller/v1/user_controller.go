@@ -19,10 +19,10 @@ type LoginParam struct {
 
 // UserLogin
 // @Summary
-// @Tags     User API
-// @Param    param  body      LoginParam   true  "login param"
-// @Success  200  {object}  app.ApiJson  ""
-// @Router   /v1/user/login [post]
+// @Tags    User API
+// @Param   param body     LoginParam  true "login param"
+// @Success 200   {object} app.ApiJson ""
+// @Router  /v1/user/login [post]
 func UserLogin(c *gin.Context) {
 	var param LoginParam
 	err := c.ShouldBindJSON(&param)
@@ -61,10 +61,10 @@ type RegisterParam struct {
 
 // UserRegister
 // @Summary
-// @Tags     User API
-// @Param    param  body      RegisterParam  true  "register param"
-// @Success  200    {object}  app.ApiJson    ""
-// @Router   /v1/user/register [post]
+// @Tags    User API
+// @Param   param body     RegisterParam true "register param"
+// @Success 200   {object} app.ApiJson   ""
+// @Router  /v1/user/register [post]
 func UserRegister(c *gin.Context) {
 	var param RegisterParam
 	err := c.ShouldBindJSON(&param)
@@ -98,9 +98,9 @@ func UserRegister(c *gin.Context) {
 
 // UserMe
 // @Summary
-// @Tags     User API
-// @Success  200    {object}  app.ApiJson  ""
-// @Router   /v1/user/me [post]
+// @Tags    User API
+// @Success 200 {object} app.ApiJson ""
+// @Router  /v1/user/me [post]
 func UserMe(c *gin.Context) {
 	session := sessions.Default(c)
 	userId := session.Get("userId")
