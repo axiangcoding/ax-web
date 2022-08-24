@@ -6,6 +6,7 @@ require (
 	github.com/axiangcoding/axth v0.6.0
 	github.com/casbin/casbin/v2 v2.52.2
 	github.com/casbin/gorm-adapter/v3 v3.8.0
+	github.com/gin-contrib/authz v0.0.1
 	github.com/gin-contrib/cors v1.4.0
 	github.com/gin-contrib/sessions v0.0.5
 	github.com/gin-gonic/gin v1.8.1
