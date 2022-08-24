@@ -37,7 +37,7 @@ func initDB() *gorm.DB {
 	if err != nil {
 		logging.Fatalf("Can't connect to Database: %s", err)
 	}
-	logging.Info("Database connected success")
+	logging.Info("Database connected")
 	setDbProperties(db)
 	autoMigrate(db)
 	return db
@@ -64,7 +64,7 @@ func selectDbDialect() gorm.Dialector {
 // 自动更新表结构
 func autoMigrate(db *gorm.DB) {
 	if err := db.AutoMigrate(
-	// 	TODO place table struct here to auto migrate
+		// 	TODO place table struct here to auto migrate
 	); err != nil {
 		logging.Fatal(err)
 	}
